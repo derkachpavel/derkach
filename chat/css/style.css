@@ -21,7 +21,6 @@ header {
 	width: 654px;
 	height: 108px;
 	background: #457679;
-//	border:solid 1px black;
 	box-shadow: 9px 10px 14px -9px #000000;
 }
 
@@ -56,7 +55,6 @@ header {
 	width: 172px;
 	height: 351px;
 	background: #457679;
-//	border:solid 1px black;
 	box-shadow: 9px 10px 14px -9px #000000;
 }
 .departed {
@@ -73,7 +71,6 @@ div.list-uder{
 	margin:8px auto;
 	width: 150px;
 	height: 319px;
-//	border:solid 1px black;
 	background: #fff;
 }
 
@@ -201,7 +198,6 @@ ul.format-message li{
 ul.format-message a{
 	display: block;
 	width:20px;
-//	border-bottom:solid 1px black;
 	border-left:solid 1px #cecbcb;
 	padding: 0px 0px;
 	background: #457679;
@@ -237,7 +233,6 @@ form.send-message input{
 	width: 150px;
 	height: 25px;
 	background: #457679;
-//	border:solid 1px black;
 	box-shadow: 9px 9px 9px -9px #000000;
 	color: white;
 }
