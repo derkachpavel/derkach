@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chat</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+	<div class="wrapper">
+		<header>
+			<div class="time">
+				<p class="online-time">You are online for: <span>1h 30m</span></p>
+				<p class="local-time">Your local time is: <span>10:45</span></p>
+			</div>
+			<div class="pers-private">
+				<p><a class="pers-info" href="">Edit personal info</a></p>
+				<p><a class="private-mess" href="">Private messages<span>(3)</span></a></p>
+			</div>
+			<div class="logo">
+				<img src="images/hobnob.png">
+			</div>
+
+		</header>
+	
+		<div class="user-chat">
+			<div class="online-user">
+				<p class="online-user">Online:<span>4</span></p>
+			</div>
+			<div class="list-uder">
+				<ul>
+					<li class="list-uder online">John Snow</li>
+					<li class="list-uder online">Andrew Simpson</li>
+					<li class="list-uder online">Alison Black</li>
+					<li class="list-uder departed">Sasha Stuart</li>
+				</ul>
+			</div>
+			
+		</div>
+
+		<div class="chat">
+			<ul class="chat-all">
+				<li class="chat-main active"><a href="">Main chat</a></li>
+				<li class="chat-with"><a href="">Chat with Alison (2)</a><a class="close" href="">X</a></li>
+				<li class="chat-with1"><a href="">Chat with John (2)</a><a class="close" href="">X</a></li>
+
+			</ul>
+			<div class="chat-online-wr">
+				<div class="chat-online">
+					
+						<p class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Hi, how is the weather there?</span></p>
+						
+						<p class="chat-author"><span class="author"> Alison Black:</span><span class="chat-message">It's snowy, temperature here is 10 degrees below zero celsius.</span></p>
+						
+						<p class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Wuh, itseems winter has come indeed...</span></p>
+						
+					
+				</div>
+			</div>	
+		</div>
+		
+		<div class="input-message">
+			<div class="text-messege">
+				<form>
+					<textarea name="text">Hello everyone, how it's going?
+					</textarea>
+				</form>
+			</div>
+			
+			<ul class="format-message">
+				<li class="format-fat"><a href="">B</a></li>
+				<li class="format-italics"><a href="">I</a></li>
+				<li class="format-underline"><a href="">U</a></li>
+				<li class="format-link"><a href="">Link</a></li>
+			</ul>
+			<form class="send-message">
+				<input type="submit" name="send-message" value="Send message">	
+			</form>			
+		</div>
+		<div class="entered-message">
+			<div class="quantity-symbols"><p><span class="quantity">31</span> characters entered</p></div>
+			<div class="quantity-letter"><p><span class="quantity">25</span> letters entered</p></div>
+			<div class="quantity-hidden"><p><span class="quantity">4</span> whitespace characters entered</p></div>
+			<div class="quantity-punctuation"><p><span class="quantity">2</span> punctuation marks entered</p></div>
+		</div>
+	</div>
+
+
+</body>
+</html>
