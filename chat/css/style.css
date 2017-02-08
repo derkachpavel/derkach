@@ -182,6 +182,7 @@ div.text-messege textarea {
 	border:solid 1px #cecbcb;
 	padding-left:10px;
 	padding-top:10px;
+	resize: none;
 }
 
 ul.format-message{

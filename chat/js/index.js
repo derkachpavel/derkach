@@ -109,15 +109,24 @@ function timeonline(){
 		var reg_reg_punctuation_l = 0;
 	}
 	punctuation.innerHTML = reg_reg_punctuation_l;
-		
+
  }
 
  function chat_you(){
  	var text = text1.value; //берем данные из textarea
 	var new_div = document.createElement('div');  // создаем div
 	var author = "You";
+	var symbol = text1.value.length;  //количество символов
+	var reg_space = /\s/g; //проверка пробелов
+	if (text1.value.match(reg_space)){  //считаем пробелы
+		var reg_space_l = text1.value.match(reg_space).length;
+	} else {
+		var reg_space_l = 0;
+	}
+	var space = reg_space_l; //количество пробелов
+	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
 	new_div.className = "chat-author"; // присваиваем class
     new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
 	chat_online_div.appendChild(new_div); //записываем в конец
-
+	}
 } 
