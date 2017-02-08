@@ -2,15 +2,17 @@
 <html>
 <head>
 	<title>chat</title>
+	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/datenow.js"></script>
 </head>
-<body>
+<body onLoad = "datenow(); timeonline()" oninput = "count()">
 
 	<div class="wrapper">
 		<header>
 			<div class="time">
-				<p class="online-time">You are online for: <span>1h 30m</span></p>
-				<p class="local-time">Your local time is: <span>10:45</span></p>
+				<p class="online-time">You are online for: <span id="online_time">1h 30m</span></p>
+				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
 			</div>
 			<div class="pers-private">
 				<p><a class="pers-info" href="">Edit personal info</a></p>
@@ -45,14 +47,13 @@
 
 			</ul>
 			<div class="chat-online-wr">
-				<div class="chat-online">
+				<div class="chat-online" id="chat_online_div">
 					
-						<p class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Hi, how is the weather there?</span></p>
+						<div class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Hi, how is the weather there?</span></div>
 						
-						<p class="chat-author"><span class="author"> Alison Black:</span><span class="chat-message">It's snowy, temperature here is 10 degrees below zero celsius.</span></p>
+						<div class="chat-author"><span class="author"> Alison Black:</span><span class="chat-message">It's snowy, temperature here is 10 degrees below zero celsius.</span></div>
 						
-						<p class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Wuh, itseems winter has come indeed...</span></p>
-						
+						<div class="chat-author"><span class="author">John Snow:</span><span class="chat-message">Wuh, itseems winter has come indeed...</span></div>
 					
 				</div>
 			</div>	
@@ -60,8 +61,8 @@
 		
 		<div class="input-message">
 			<div class="text-messege">
-				<form>
-					<textarea name="text">Hello everyone, how it's going?
+				<form name="chat_form">
+					<textarea id="text1" name="text">Hello everyone, how it's going?
 					</textarea>
 				</form>
 			</div>
@@ -73,14 +74,14 @@
 				<li class="format-link"><a href="">Link</a></li>
 			</ul>
 			<form class="send-message">
-				<input type="submit" name="send-message" value="Send message">	
+				<input onclick="chat_you()" type="button" name="send-message" value="Send message">	
 			</form>			
 		</div>
 		<div class="entered-message">
-			<div class="quantity-symbols"><p><span class="quantity">31</span> characters entered</p></div>
-			<div class="quantity-letter"><p><span class="quantity">25</span> letters entered</p></div>
-			<div class="quantity-hidden"><p><span class="quantity">4</span> whitespace characters entered</p></div>
-			<div class="quantity-punctuation"><p><span class="quantity">2</span> punctuation marks entered</p></div>
+			<div class="quantity-symbols"><p><span id="symbol" class="quantity">31</span> characters entered</p></div>
+			<div class="quantity-letter"><p><span id="letter" class="quantity">25</span> letters entered</p></div>
+			<div class="quantity-hidden"><p><span id="space" class="quantity">4</span> whitespace characters entered</p></div>
+			<div class="quantity-punctuation"><p><span id="punctuation" class="quantity">2</span> punctuation marks entered</p></div>
 		</div>
 	</div>
 

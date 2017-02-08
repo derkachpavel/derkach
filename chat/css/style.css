@@ -240,5 +240,6 @@ div.entered-message {
 	position:absolute;
 	bottom:0px;
 	left:182px;
-	font-size: 12px;
+	font-size: 13px;
+	font-weight: 200;
 }
