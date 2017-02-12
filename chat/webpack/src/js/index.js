@@ -1,3 +1,79 @@
+var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
+/* users.data.forEach(
+  function (obj) {
+    var ul = document.getElementById('from-file');
+    ul.innerHTML += `<li>${obj.name} ${obj.status}</li>`;
+  }
+) */
+
+function chat_you(){
+ 	var text = text1.value; //берем данные из textarea
+	var new_div = document.createElement('div');  // создаем div
+	var author = "You";
+	var symbol = text1.value.length;  //количество символов
+	var reg_space = /\s/g; //проверка пробелов
+	if (text1.value.match(reg_space)){  //считаем пробелы
+		var reg_space_l = text1.value.match(reg_space).length;
+	} else {
+		var reg_space_l = 0;
+	}
+	var space = reg_space_l; //количество пробелов
+	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
+	new_div.className = "chat-author"; // присваиваем class
+    new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
+	chat_online_div.appendChild(new_div); //записываем в конец
+	}
+}
+var el = document.getElementById("input_chat");
+el.addEventListener("click", chat_you, false);
+/*
+// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript
+var request = new XMLHttpRequest();
+request.open('GET', 'http://mockbin.com/bin/35ea6adb-2b94-4c48-93f7-4b02b4849e3e', true);
+
+request.onload = function() {
+  if (request.status >= 200 && request.status < 400) {
+    // Обработчик успещного ответа
+    var response = request.responseText;
+    console.log(response);
+
+    JSON.parse(response).forEach(
+      function (obj) {
+        var ul = document.getElementById('using-pure-js');
+        ul.innerHTML += `<li>${obj.name} ${obj.status}</li>`;
+      }
+    )
+  } else {
+    // Обработчик ответа в случае ошибки
+  }
+};
+request.onerror = function() {
+  // Обработчик ответа в случае неудачного соеденения
+};
+request.send();
+
+
+
+
+var $ = require('jquery');  // Подключение установленной библиотеки jQuery
+
+// Выполняется AJAX запрос к внешнему ресурсу c помощью jQuery
+$.ajax({
+  type: 'GET',
+  url: 'http://mockbin.com/bin/35ea6adb-2b94-4c48-93f7-4b02b4849e3e',
+  success: function(response) {  // Обработчик успещного ответа
+    console.log(response); // Вывод содержимого ответа в консоль
+
+    $.parseJSON(response).forEach(
+      function (obj) {
+        $("#using-jquery").append(`<li>${obj.name} ${obj.status}</li>`);
+      }
+    )
+  },
+  error: function(data, status) {  // Обработчик ответа в случае ошибки
+    console.error(data, status);
+  }
+});
 
 function datenow(){
 	var now = new Date();
@@ -6,7 +82,7 @@ function datenow(){
     	hours = "0" + hours;
     } else {
     	hours = hours;
-    }
+    };
 
     var minutes = now.getMinutes();
     if (minutes < 10){
@@ -28,7 +104,7 @@ function datenow(){
 }
 
 
-startday = new Date();
+var startday = new Date();
 clockStart = startday.getTime();
 
 function timeonline(){
@@ -112,7 +188,7 @@ function timeonline(){
 
  }
 
- function chat_you(){
+ input_chat.onClick = function chat_you(){
  	var text = text1.value; //берем данные из textarea
 	var new_div = document.createElement('div');  // создаем div
 	var author = "You";
@@ -129,4 +205,5 @@ function timeonline(){
     new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
 	chat_online_div.appendChild(new_div); //записываем в конец
 	}
-} 
+}*/
+

@@ -3,10 +3,8 @@
 <head>
 	<title>chat</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="js/index.js"></script>
 </head>
-<body onLoad = "datenow(); timeonline()" oninput = "count()">
+<body>
 
 	<div class="wrapper">
 		<header>
@@ -73,7 +71,7 @@
 				<li class="format-link"><a href="">Link</a></li>
 			</ul>
 			<form class="send-message">
-				<input onclick="chat_you()" type="button" name="send-message" value="Send message">	
+				<input id="input_chat" type="button" name="send-message" value="Send message">	
 			</form>			
 		</div>
 		<div class="entered-message">
