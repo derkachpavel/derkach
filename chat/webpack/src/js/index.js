@@ -1,12 +1,18 @@
+
+
 var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
+var chat = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
+var count = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
+//var datenow = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 /* users.data.forEach(
   function (obj) {
     var ul = document.getElementById('from-file');
     ul.innerHTML += `<li>${obj.name} ${obj.status}</li>`;
   }
-) */
+) 
+*/
 
-function chat_you(){
+/*function chat_you(){
  	var text = text1.value; //берем данные из textarea
 	var new_div = document.createElement('div');  // создаем div
 	var author = "You";
@@ -26,6 +32,10 @@ function chat_you(){
 }
 var el = document.getElementById("input_chat");
 el.addEventListener("click", chat_you, false);
+*/
+
+
+
 /*
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript
 var request = new XMLHttpRequest();
