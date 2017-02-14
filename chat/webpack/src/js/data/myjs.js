@@ -21,54 +21,16 @@ var chat= function chat_you(){
 input_chat.addEventListener("click", chat);
 
 
- 
-
 text1.addEventListener("keydown", function TAKeyDown(event) {  
     event = event || window.event;
     if(event.keyCode != 13) { return; }
     if (event.preventDefault) {   // если метод существует
-        event.preventDefault(); // то вызвать его
-        alert("Нажал пробел");    
-    //	event.preventDefault(); // то вызвать его
+        event.preventDefault(); // то вызвать его       
     } 
 } );
  
 
-
-/*var datenow = function datenow(){
-	var now = new Date();
-    var hours = now.getHours();
-    if (hours < 10){
-    	hours = "0" + hours;
-    } else {
-    	hours = hours;
-    };
-
-    var minutes = now.getMinutes();
-    if (minutes < 10){
-    	minutes = "0" + minutes;
-    } else {
-    	minutes = minutes;
-    }
-
-    var seconds = now.getSeconds();
-    if (seconds < 10){
-    	seconds = "0" + seconds;
-    } else {
-    	seconds = seconds;
-    } 
-
-    local_time_now.innerHTML = hours + ":" + minutes + ":" + seconds;
-//    online_time.innerHTML = hours + ":" + minutes + ":" + seconds;
-	setTimeout("datenow()", 1000);
-}
-
-window.addEventListener("load", datenow);
-setTimeout("datenow()", 1000);
-
-*/
-
-var count = function count() {
+function count() {
 	symbol.innerHTML = text1.value.length;
 	
 	var reg_letter = /[А-ЯЇЁа-яїёьъA-Za-z]/g;
@@ -99,3 +61,85 @@ var count = function count() {
 
  }
 text1.addEventListener("input", count);
+
+
+function datenow(){
+	var now = new Date();
+    var hours = now.getHours();
+    if (hours < 10){
+    	hours = "0" + hours;
+    } else {
+    	hours = hours;
+    };
+
+    var minutes = now.getMinutes();
+    if (minutes < 10){
+    	minutes = "0" + minutes;
+    } else {
+    	minutes = minutes;
+    }
+
+    var seconds = now.getSeconds();
+    if (seconds < 10){
+    	seconds = "0" + seconds;
+    } else {
+    	seconds = seconds;
+    } 
+
+    local_time_now.innerHTML = hours + ":" + minutes + ":" + seconds;
+}
+setInterval(datenow, 0);
+
+
+
+var startday = new Date();
+var clockStart = startday.getTime();
+
+function timeonline(){
+
+	var now = new Date(); // текущее время
+
+	var fut = startday; // введенное время надо заменить на время входа в чат
+
+	var delta = now -fut ; // разница во времени ( в миллисекундах)
+
+	var s = delta/1000; // переводим в секунды
+	var m = delta/1000/60; // переводим в минуты
+	var h = delta/1000/3600; //переводим в часы
+
+
+	var m_c = Math.floor(m); //целое возвращаем минуты
+	var h_c = Math.floor(h);//целое возвращаем часы
+	var m_m = m_c%60; //остаток минут
+
+	if (s>3600){  
+	var s1 = s-h_c*3600-m_m*60; // отнимаем часы и минуты от секунд
+	} else if (s>60){
+		var s1 = s-m_m*60; // отнимаем минуты от секунд 
+		} else {
+			var s1 = s; // выводим секунды
+		}
+
+	var s_c = Math.floor(s1); // берем целую часть секунд
+	if (s_c<10){
+		s_c = "0" + s_c;  // добавляем 0 для красоты
+	}else {
+		s_c = s_c;
+	}
+
+	if (m_m<10){
+		m_m = "0" + m_m; // добавляем 0 для красоты
+	} else {
+		m_m = m_m;
+	}
+
+	if (h_c<10){
+		h_c = "0" + h_c; // добавляем 0 для красоты
+	}else {
+		h_c = h_c;
+	}
+
+	online_time.innerHTML = h_c + ":" + m_m + ":" + s_c;
+}
+setInterval(timeonline, 0);
+
