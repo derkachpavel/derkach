@@ -1,7 +1,7 @@
 
 
 var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
-var chat = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
+var send_massage = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 //var count = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 //var datenow = require('./data/myjs');
  

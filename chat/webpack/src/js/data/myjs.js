@@ -1,5 +1,5 @@
 
-var chat= function chat_you(){
+var send_massage = function send_massage(){
  	var text = text1.value; //берем данные из textarea
 	var new_div = document.createElement('div');  // создаем div
 	var author = "You";
@@ -15,25 +15,41 @@ var chat= function chat_you(){
 	new_div.className = "chat-author"; // присваиваем class
     new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
 	chat_online_div.appendChild(new_div); //записываем в конец
+	
 	}
+	document.getElementById('text1').value = '';  // очищаем после отправки
 }
 
-input_chat.addEventListener("click", chat);
+input_chat.addEventListener("click", send_massage);
+
 
 
 text1.addEventListener("keydown", function TAKeyDown(event) {  
-    event = event || window.event;
+    event = event || window.event;   
     if(event.keyCode != 13) { return; }
-    if (event.preventDefault) {   // если метод существует
-        event.preventDefault(); // то вызвать его       
-    } 
+    if (event.keyCode == 13) {   // если метод существует
+        event.preventDefault(); // то вызвать его    
+  
+    }
+     send_massage(); // оправляем сообщение
+     count_reset();  // очищаем подсчет символов
 } );
+
  
+function count_reset(){
+	symbol.innerHTML = "0";
+	letter.innerHTML = "0";
+	space.innerHTML = "0";
+	punctuation.innerHTML = "0";
+
+}
+input_chat.addEventListener("click", count_reset);
+
 
 function count() {
-	symbol.innerHTML = text1.value.length;
+	symbol.innerHTML = text1.value.length; // подсчет общего количества символов
 	
-	var reg_letter = /[А-ЯЇЁа-яїёьъA-Za-z]/g;
+	var reg_letter = /[А-ЯЇЁа-яїёьъA-Za-z]/g;  // проверка букв алфавита
 	
 	if (text1.value.match(reg_letter)){
 		var reg_letter_l = text1.value.match(reg_letter).length;
@@ -42,7 +58,7 @@ function count() {
 	}
 	letter.innerHTML = reg_letter_l;
 		
-	var reg_space = /\s/g;
+	var reg_space = /\s/g;   // проверка пробелов
 	if (text1.value.match(reg_space)){
 		var reg_space_l = text1.value.match(reg_space).length;
 	} else {
@@ -51,13 +67,13 @@ function count() {
 	space.innerHTML = reg_space_l;
 	
 	
-	var reg_punctuation = /[.,;:!?]/g;
+	var reg_punctuation = /[.,;:!?]/g;   // проверка пунктуации
 	if (text1.value.match(reg_punctuation)){
-		var reg_reg_punctuation_l = text1.value.match(reg_punctuation).length;
+		var reg_punctuation_l = text1.value.match(reg_punctuation).length;
 	} else {
-		var reg_reg_punctuation_l = 0;
+		var reg_punctuation_l = 0;
 	}
-	punctuation.innerHTML = reg_reg_punctuation_l;
+	punctuation.innerHTML = reg_punctuation_l;
 
  }
 text1.addEventListener("input", count);
@@ -143,3 +159,20 @@ function timeonline(){
 }
 setInterval(timeonline, 0);
 
+
+function getSelectionText() {
+  
+  var txt = '';
+  if (txt = window.getSelection) // Не IE, используем метод getSelection
+  {
+    txt = window.getSelection().toString();
+     alert(txt);
+  } 
+}
+select_b.addEventListener("click", getSelectionText);
+
+function getSelectionText1() {
+  
+  alert("gfdkjsg");
+}
+select_i.addEventListener("click", getSelectionText1);
