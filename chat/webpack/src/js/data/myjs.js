@@ -171,8 +171,21 @@ function getSelectionText() {
 }
 select_b.addEventListener("click", getSelectionText);
 
-function getSelectionText1() {
+/*function getSelectionText1() {
   
-  alert("gfdkjsg");
+  
+var selRange = 0, selStart = 0, selEnd = 0;
+
+if (document.selection)
+  selRange = document.selection.createRange();
+else {
+  selStart = document.getElementById('text1').selectionStart;
+  selEnd = document.getElementById('text1').selectionEnd;
 }
-select_i.addEventListener("click", getSelectionText1);
+
+if (document.selection)
+  alert(selRange.text);
+else
+  alert(document.getElementById('text1').value.substr(selStart, selEnd-selStart);
+}
+select_i.addEventListener("click", getSelectionText1);*/
