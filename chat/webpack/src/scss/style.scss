@@ -197,7 +197,7 @@ ul.format-message li{
 	float:left; 
 	text-align: center;
 }
-ul.format-message a{
+ul.format-message input{
 	display: block;
 	width:20px;
 	border-left:solid 1px #cecbcb;
@@ -205,20 +205,20 @@ ul.format-message a{
 	background: #457679;
 	color: white;
 }
-li.format-fat a{
+li.format-fat input{
 	font-weight: bold;
 }
 
-li.format-italics a{
+li.format-italics input{
 	font-style:italic;	
 }
 
-li.format-underline a{
+li.format-underline input{
 	border-right:solid 1px #cecbcb;
 	text-decoration:underline;
 }
 
-li.format-link a:last-child{
+li.format-link input:last-child{
 	border-right:solid 1px #cecbcb;
 	width:40px;
 	margin-left:20px;

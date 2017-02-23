@@ -1,4 +1,6 @@
 
+	
+
 var send_massage = function send_massage(){
  	var text = text1.value; //берем данные из textarea
 	var new_div = document.createElement('div');  // создаем div
@@ -12,15 +14,17 @@ var send_massage = function send_massage(){
 	}
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
-	new_div.className = "chat-author"; // присваиваем class
-    new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
-	chat_online_div.appendChild(new_div); //записываем в конец
+
+		new_div.className = "chat-author"; // присваиваем class
+	    new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
+		chat_online_div.appendChild(new_div); //записываем в конец
 	
 	}
 	document.getElementById('text1').value = '';  // очищаем после отправки
 }
 
 input_chat.addEventListener("click", send_massage);
+
 
 
 
@@ -160,32 +164,39 @@ function timeonline(){
 setInterval(timeonline, 0);
 
 
-function getSelectionText() {
-  
+/*function getSelectionText() {  // такая конструкция не работает с textarea
+  select_b.removeEventListener("click", getSelectionText);
   var txt = '';
   if (txt = window.getSelection) // Не IE, используем метод getSelection
   {
     txt = window.getSelection().toString();
-     alert(txt);
+
+ //   alert(txt);
+
+    var htmlText = chat_online_div.innerHTML
+	var newHtmlText = htmlText.replace(txt, "<b>" + txt + "</b>"); 
+	chat_online_div.innerHTML = newHtmlText;
+
+
   } 
 }
-select_b.addEventListener("click", getSelectionText);
 
-/*function getSelectionText1() {
-  
+select_b.addEventListener("click", getSelectionText);
+*/
+
+function getSelectionText1() { //такая конструкция работает с textarea
   
 var selRange = 0, selStart = 0, selEnd = 0;
+selStart = document.getElementById('text1').selectionStart;
+selEnd = document.getElementById('text1').selectionEnd;
+var textselect = document.getElementById('text1').value.substr(selStart, selEnd-selStart);
+alert(textselect);
+var htmlText = text1.value;
+var newHtmlText = htmlText.replace(textselect, '<b>' + textselect + '</b>'); 
+//text2.innerHTML = newHtmlText; //куда записывать
 
-if (document.selection)
-  selRange = document.selection.createRange();
-else {
-  selStart = document.getElementById('text1').selectionStart;
-  selEnd = document.getElementById('text1').selectionEnd;
 }
 
-if (document.selection)
-  alert(selRange.text);
-else
-  alert(document.getElementById('text1').value.substr(selStart, selEnd-selStart);
-}
-select_i.addEventListener("click", getSelectionText1);*/
+select_i.addEventListener("click", getSelectionText1);
+
+
