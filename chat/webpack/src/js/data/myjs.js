@@ -14,12 +14,12 @@ var send_massage = function send_massage(){
 	}
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
-
 		new_div.className = "chat-author"; // присваиваем class
 	    new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
 		chat_online_div.appendChild(new_div); //записываем в конец
 	
 	}
+
 	document.getElementById('text1').value = '';  // очищаем после отправки
 }
 
@@ -48,6 +48,7 @@ function count_reset(){
 
 }
 input_chat.addEventListener("click", count_reset);
+
 
 
 function count() {
@@ -187,16 +188,26 @@ select_b.addEventListener("click", getSelectionText);
 function getSelectionText1() { //такая конструкция работает с textarea
   
 var selRange = 0, selStart = 0, selEnd = 0;
-selStart = document.getElementById('text1').selectionStart;
-selEnd = document.getElementById('text1').selectionEnd;
-var textselect = document.getElementById('text1').value.substr(selStart, selEnd-selStart);
-alert(textselect);
-var htmlText = text1.value;
-var newHtmlText = htmlText.replace(textselect, '<b>' + textselect + '</b>'); 
-//text2.innerHTML = newHtmlText; //куда записывать
+selStart = text1.selectionStart;
+selEnd = text1.selectionEnd;
+var textselect = text1.value.substr(selStart, selEnd-selStart);
+if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если есть выделение
+//	alert(textselect);
+	var htmlText = text1.value;
+	if(this.getAttribute('Class') == 'format-italics'){// для наклонного стиля
+   var newHtmlText = htmlText.replace(textselect, '<i>' + textselect + '</i>');
+  }
+  if(this.getAttribute('Class') == 'format-fat'){// для жирного
+   var newHtmlText = htmlText.replace(textselect, '<b>' + textselect + '</b>');
+  }
+  if(this.getAttribute('Class') == 'format-underline'){ //для подчеркивания
+   var newHtmlText = htmlText.replace(textselect, '<u>' + textselect + '</u');
+  }
 
+//	alert( this.getAttribute('Class') );
+	text1.value = newHtmlText;  //куда записывать
+	}
 }
-
 select_i.addEventListener("click", getSelectionText1);
-
-
+select_b.addEventListener("click", getSelectionText1);
+select_u.addEventListener("click", getSelectionText1);
