@@ -57,7 +57,7 @@ header {
 	background: #457679;
 	box-shadow: 9px 10px 14px -9px #000000;
 }
-.departed {
+.away {  // стиль для неактивного
 	color:orange;
 }
 p.online-user{
@@ -155,15 +155,53 @@ div.chat-online{
 	left: 10px;
 	width: 462px;
 	height: 253px;
+	overflow: auto;
 }
 
-span.author{
-	font-weight: bold;
+.message_pull{
+	display:inline-block;
+	background:#eaf5f1;
+	border-radius:5px;
+	padding:10px;
+	margin-left:5px;
+	width:250px;
+	text-align:left;
+	margin-top:10px;
+}
+
+.date_pull{
+	display:inline-block;
+	font-weight: 200;
+	font-size:11px;
 	text-decoration:underline;
+	margin-left:5px;
+}
+
+li.chat-message-all{
+	display:block;
+	margin-top:10px;
+	text-align:right;
+	margin-right:10px;
+	
 }
 
 span.chat-message{
-	margin-left: 5px;
+	display:inline-block;
+	background:#aad4c3;
+	border-radius:5px;
+	padding:10px;
+	margin-right:5px;
+	width:250px;
+	text-align:left;
+	
+}
+
+
+span.date{
+	display:inline-block;
+	font-weight: 200;
+	font-size:11px;
+	text-decoration:underline;
 }
 
 .input-message{

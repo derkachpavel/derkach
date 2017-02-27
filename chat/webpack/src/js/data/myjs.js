@@ -1,9 +1,11 @@
 
 	
 
-var send_massage = function send_massage(){
- 	var text = text1.value; //берем данные из textarea
-	var new_div = document.createElement('div');  // создаем div
+var send_massage = function send_massage(){ 
+	var date = new Date().getHours()+":"+new Date().getMinutes();
+
+	var text = text1.value; //берем данные из textarea
+	var new_li = document.createElement('li');  // создаем div
 	var author = "You";
 	var symbol = text1.value.length;  //количество символов
 	var reg_space = /\s/g; //проверка пробелов
@@ -14,10 +16,28 @@ var send_massage = function send_massage(){
 	}
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
-		new_div.className = "chat-author"; // присваиваем class
-	    new_div.innerHTML = "<span class='author'>" + author + ":" + "</span><span class='chat-message'>" + text + "</span>";  // заполняем div
-		chat_online_div.appendChild(new_div); //записываем в конец
-	
+		new_li.className = "chat-message-all"; // присваиваем class
+	    new_li.innerHTML = "<span class='chat-message'>" + text + "</span><span class='date'>" + date + "</span>";  // заполняем div
+		chat_online_ul.appendChild(new_li); //записываем в конец
+	    //передача на сервер
+	   /* var xhr = new XMLHttpRequest(); 
+		xhr.onreadystatechange = function () { 
+		   if (this.readyState != 4) return; 
+		   if (this.status == 200 || this.status == 201) {
+		      var data = JSON.parse(this.responseText);
+		      console.log(data);
+		    } 
+		 };
+		 xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/messages", true); 
+		 xhr.setRequestHeader('Content-Type', 'application/json');
+		 xhr.send(JSON.stringify(
+		 { 
+		    "datetime": new Date().getHours() + ':' + new Date().getMinutes(), 
+		    "message": text,
+		    "user_id": author
+		  }
+		  ));*/
+		 //передача на сервер
 	}
 
 	document.getElementById('text1').value = '';  // очищаем после отправки
@@ -115,6 +135,8 @@ setInterval(datenow, 0);
 
 var startday = new Date();
 var clockStart = startday.getTime();
+
+//alert(new Date().getHours()+":"+new Date().getMinutes() );
 
 function timeonline(){
 
