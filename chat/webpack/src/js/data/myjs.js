@@ -19,6 +19,7 @@ var send_massage = function send_massage(){
 		new_li.className = "chat-message-all"; // присваиваем class
 	    new_li.innerHTML = "<span class='chat-message'>" + text + "</span><span class='date'>" + date + "</span>";  // заполняем div
 		chat_online_ul.appendChild(new_li); //записываем в конец
+		chat_online_ul.scrollIntoView(false);
 	    //передача на сервер
 	   /* var xhr = new XMLHttpRequest(); 
 		xhr.onreadystatechange = function () { 

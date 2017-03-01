@@ -147,15 +147,27 @@ ul.chat-all li:hover a.close:hover{
 	height: 264px;
 	background: #fff;
 	border:solid 1px #cecbcb;
+	overflow: auto;
+	position: relative;
 }
  
+div.chat-online-all{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 469px;
+	height: 260px;
+	overflow: auto;
+	
+} 
+
 div.chat-online{
 	position: absolute;
-	bottom: 0px;
+	top: 0px;
 	left: 10px;
-	width: 462px;
-	height: 253px;
-	overflow: auto;
+	width: 440px;
+	height: 260px;
+	
 }
 
 .message_pull{
@@ -193,6 +205,7 @@ span.chat-message{
 	margin-right:5px;
 	width:250px;
 	text-align:left;
+	word-wrap: break-word;
 	
 }
 
@@ -221,6 +234,7 @@ div.text-messege textarea {
 	padding-left:10px;
 	padding-top:10px;
 	resize: none;
+
 }
 
 ul.format-message{
