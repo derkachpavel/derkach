@@ -48,12 +48,21 @@ header {
 
 }
 
-.user-chat{
+.input_name{
 	position: absolute;
 	top: 145px;
 	left: 0;
+	width: 168px;
+	height: 20px;
+	border: solid 1px #cecbcb;
+}
+
+.user-chat{
+	position: absolute;
+	top: 175px;
+	left: 0;
 	width: 172px;
-	height: 351px;
+	height: 321px;
 	background: #457679;
 	box-shadow: 9px 10px 14px -9px #000000;
 }
@@ -70,7 +79,7 @@ p.online-user{
 div.list-uder{
 	margin:8px auto;
 	width: 150px;
-	height: 319px;
+	height: 289px;
 	background: #fff;
 }
 
@@ -143,24 +152,33 @@ ul.chat-all li:hover a.close:hover{
 }
 
 .chat-online-wr{
+	position:relative;
 	width: 470px;
 	height: 264px;
 	background: #fff;
 	border:solid 1px #cecbcb;
 }
  
+div.chat-online-all{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 470px;
+	height: 260px;
+	overflow: auto;
+}
 div.chat-online{
 	position: absolute;
-	bottom: 0px;
+	top: 0px;
 	left: 10px;
-	width: 462px;
-	height: 253px;
-	overflow: auto;
+	width: 442px;
+	height: 259px;
+	
 }
 
 .message_pull{
 	display:inline-block;
-	background:#eaf5f1;
+	background:#f2f5f4;
 	border-radius:5px;
 	padding:10px;
 	margin-left:5px;
@@ -187,12 +205,13 @@ li.chat-message-all{
 
 span.chat-message{
 	display:inline-block;
-	background:#aad4c3;
+	background:#dddddd;
 	border-radius:5px;
 	padding:10px;
 	margin-right:5px;
 	width:250px;
 	text-align:left;
+	word-wrap:break-word;
 	
 }
 

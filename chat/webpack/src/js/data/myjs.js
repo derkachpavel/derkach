@@ -1,8 +1,40 @@
 
-	
+function your_nik(){
+var your_nik = your_name.value;
+return your_nik;
+}
+
+
+var date_now = function (){
+	var now = new Date();
+    var hours = now.getHours();
+    if (hours < 10){
+    	hours = "0" + hours;
+    } else {
+    	hours = hours;
+    };
+
+    var minutes = now.getMinutes();
+    if (minutes < 10){
+    	minutes = "0" + minutes;
+    } else {
+    	minutes = minutes;
+    }
+
+    var seconds = now.getSeconds();
+    if (seconds < 10){
+    	seconds = "0" + seconds;
+    } else {
+    	seconds = seconds;
+    } 
+    var time_now = hours + ":" + minutes + ":" + seconds;
+  	return time_now;
+}
+
+
 
 var send_massage = function send_massage(){ 
-	var date = new Date().getHours()+":"+new Date().getMinutes();
+	//var date = new Date().getHours()+":"+new Date().getMinutes();
 
 	var text = text1.value; //берем данные из textarea
 	var new_li = document.createElement('li');  // создаем div
@@ -17,10 +49,27 @@ var send_massage = function send_massage(){
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
 		new_li.className = "chat-message-all"; // присваиваем class
-	    new_li.innerHTML = "<span class='chat-message'>" + text + "</span><span class='date'>" + date + "</span>";  // заполняем div
+	    new_li.innerHTML = "<span class='chat-message'>" + text + "</span><span class='date'>" + date_now() + "</span>";  // заполняем div
 		chat_online_ul.appendChild(new_li); //записываем в конец
+		chat_online_ul.scrollIntoView(false);
 	    //передача на сервер
-	   /* var xhr = new XMLHttpRequest(); 
+	    send_massage_server();
+	  
+		 //передача на сервер
+	}
+
+	document.getElementById('text1').value = '';  // очищаем после отправки
+}
+
+input_chat.addEventListener("click", send_massage);
+
+
+
+function send_massage_server(){
+		//передача на сервер
+		var text = text1.value; //берем данные из textarea
+		var author = "You";
+	    var xhr = new XMLHttpRequest(); 
 		xhr.onreadystatechange = function () { 
 		   if (this.readyState != 4) return; 
 		   if (this.status == 200 || this.status == 201) {
@@ -32,20 +81,14 @@ var send_massage = function send_massage(){
 		 xhr.setRequestHeader('Content-Type', 'application/json');
 		 xhr.send(JSON.stringify(
 		 { 
-		    "datetime": new Date().getHours() + ':' + new Date().getMinutes(), 
+		    "datetime": date_now(), 
 		    "message": text,
-		    "user_id": author
+		    "user_id": your_nik()
 		  }
-		  ));*/
+		  ));
 		 //передача на сервер
-	}
 
-	document.getElementById('text1').value = '';  // очищаем после отправки
 }
-
-input_chat.addEventListener("click", send_massage);
-
-
 
 
 text1.addEventListener("keydown", function TAKeyDown(event) {  
@@ -104,39 +147,14 @@ function count() {
 text1.addEventListener("input", count);
 
 
-function datenow(){
-	var now = new Date();
-    var hours = now.getHours();
-    if (hours < 10){
-    	hours = "0" + hours;
-    } else {
-    	hours = hours;
-    };
-
-    var minutes = now.getMinutes();
-    if (minutes < 10){
-    	minutes = "0" + minutes;
-    } else {
-    	minutes = minutes;
-    }
-
-    var seconds = now.getSeconds();
-    if (seconds < 10){
-    	seconds = "0" + seconds;
-    } else {
-    	seconds = seconds;
-    } 
-
-    local_time_now.innerHTML = hours + ":" + minutes + ":" + seconds;
+function datenow(){  //текущее время
+    local_time_now.innerHTML = date_now(); // берем из функции date_now()
 }
 setInterval(datenow, 0);
 
 
-
 var startday = new Date();
 var clockStart = startday.getTime();
-
-//alert(new Date().getHours()+":"+new Date().getMinutes() );
 
 function timeonline(){
 
@@ -187,26 +205,6 @@ function timeonline(){
 setInterval(timeonline, 0);
 
 
-/*function getSelectionText() {  // такая конструкция не работает с textarea
-  select_b.removeEventListener("click", getSelectionText);
-  var txt = '';
-  if (txt = window.getSelection) // Не IE, используем метод getSelection
-  {
-    txt = window.getSelection().toString();
-
- //   alert(txt);
-
-    var htmlText = chat_online_div.innerHTML
-	var newHtmlText = htmlText.replace(txt, "<b>" + txt + "</b>"); 
-	chat_online_div.innerHTML = newHtmlText;
-
-
-  } 
-}
-
-select_b.addEventListener("click", getSelectionText);
-*/
-
 function getSelectionText1() { //такая конструкция работает с textarea
   
 var selRange = 0, selStart = 0, selEnd = 0;
@@ -214,7 +212,6 @@ selStart = text1.selectionStart;
 selEnd = text1.selectionEnd;
 var textselect = text1.value.substr(selStart, selEnd-selStart);
 if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если есть выделение
-//	alert(textselect);
 	var htmlText = text1.value;
 	if(this.getAttribute('Class') == 'format-italics'){// для наклонного стиля
    var newHtmlText = htmlText.replace(textselect, '<i>' + textselect + '</i>');
@@ -226,7 +223,6 @@ if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если е�
    var newHtmlText = htmlText.replace(textselect, '<u>' + textselect + '</u');
   }
 
-//	alert( this.getAttribute('Class') );
 	text1.value = newHtmlText;  //куда записывать
 	}
 }
