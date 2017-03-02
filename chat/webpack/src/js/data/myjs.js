@@ -5,6 +5,7 @@ return your_nik;
 }
 
 
+
 var date_now = function (){
 	var now = new Date();
     var hours = now.getHours();
@@ -38,6 +39,7 @@ var send_massage = function send_massage(){
 
 	var text = text1.value; //берем данные из textarea
 	var new_li = document.createElement('li');  // создаем div
+	var new_li_1 = document.createElement('li');  // создаем div
 	var author = "You";
 	var symbol = text1.value.length;  //количество символов
 	var reg_space = /\s/g; //проверка пробелов
@@ -49,9 +51,35 @@ var send_massage = function send_massage(){
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
 		new_li.className = "chat-message-all"; // присваиваем class
-	    new_li.innerHTML = "<span class='chat-message'>" + text + "</span><span class='date'>" + date_now() + "</span>";  // заполняем div
+	    new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";  // заполняем div
+		
+
+	/*	<span class='date_hidden'>"+ +new Date() + "</span>*/
+	
+	/*    var	date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
+	//	var date_pre_last = date_old[date_old.length-2].innerHTML; // дата предпоследнего последнего сообщения	
+	 //   var date_last = date_old[date_old.length-1].innerHTML; // дата последнего сообщения		
+	 //   var date_now1 = +new Date();
+	 //alert(date_old[0].innerHTML);
+		if(1>0){
+
+		var text_old = chat_online_ul.getElementsByClassName('chat_message'); // все сообщения
+		var text_last = text_old[text_old.length-1].innerHTML; // тектс последнего сообщения		
+		
+		new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text_last + "</br>" + text + "</span><span class='date'>" + date_now() + "</span>"; 
+		
 		chat_online_ul.appendChild(new_li); //записываем в конец
-		chat_online_ul.scrollIntoView(false);
+     	chat_online_ul.scrollIntoView(false);
+		
+			}else{
+			new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
+			chat_online_ul.appendChild(new_li); //записываем в конец
+	   		chat_online_ul.scrollIntoView(false);
+			}	*/
+
+	new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
+	chat_online_ul.appendChild(new_li); //записываем в конец
+	chat_online_ul.scrollIntoView(false);	 
 	    //передача на сервер
 	    send_massage_server();
 	  
