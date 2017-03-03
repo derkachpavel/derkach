@@ -51,37 +51,52 @@ var send_massage = function send_massage(){
 	var space = reg_space_l; //количество пробелов
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
 		new_li.className = "chat-message-all"; // присваиваем class
-	    new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";  // заполняем div
+	 //   new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";  // заполняем div
 		
 
-	/*	<span class='date_hidden'>"+ +new Date() + "</span>*/
 	
-	/*    var	date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
+		
+	    var	date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
 	//	var date_pre_last = date_old[date_old.length-2].innerHTML; // дата предпоследнего последнего сообщения	
-	 //   var date_last = date_old[date_old.length-1].innerHTML; // дата последнего сообщения		
-	 //   var date_now1 = +new Date();
-	 //alert(date_old[0].innerHTML);
-		if(1>0){
+	//    var date_last = date_old[date_old.length-1].innerHTML; // дата последнего сообщения		
+	//    var date_now1 = +new Date();
+	 	
+		
+		var li_old = chat_online_ul.getElementsByClassName('chat-message-all'); // НАЛИЧИЕ БЛОКОВ С ИМЕНЕМ  chat-message-all
+		alert(li_old[li_old.length-1].innerHTML + li_old.length);
+		
+		 if(+new Date() - date_old[date_old.length-1].innerHTML < 10000){
 
 		var text_old = chat_online_ul.getElementsByClassName('chat_message'); // все сообщения
 		var text_last = text_old[text_old.length-1].innerHTML; // тектс последнего сообщения		
 		
+		//var li_old = chat_online_ul.getElementsByClassName('chat-message-all'); // все сообщения
+		var li_last = li_old[li_old.length-1].innerHTML; // тектс последнего сообщения
+
 		new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text_last + "</br>" + text + "</span><span class='date'>" + date_now() + "</span>"; 
 		
-		chat_online_ul.appendChild(new_li); //записываем в конец
-     	chat_online_ul.scrollIntoView(false);
 		
+		chat_online_ul.appendChild(new_li); //записываем в конец
+		chat_online_ul.replaceChild(li_old[li_old.length-1], li_old[li_old.length-2]);  // ЗАМЕНЯЕМ ПОСЛЕДНЮЮ ЗАПИСЬ
+		chat_online_ul.scrollIntoView(false);
+     	
+		
+		/*setTimeout(function() {
+	    chat_online_ul.removeChild(li_old[li_old.length-1]);
+	  	}, 2000);*/
+		
+	  
 			}else{
 			new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
 			chat_online_ul.appendChild(new_li); //записываем в конец
 	   		chat_online_ul.scrollIntoView(false);
-			}	*/
+			}	
 
-	new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
-	chat_online_ul.appendChild(new_li); //записываем в конец
-	chat_online_ul.scrollIntoView(false);	 
+//	new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
+//	chat_online_ul.appendChild(new_li); //записываем в конец
+//	chat_online_ul.scrollIntoView(false);	 
 	    //передача на сервер
-	    send_massage_server();
+	  //  send_massage_server();
 	  
 		 //передача на сервер
 	}

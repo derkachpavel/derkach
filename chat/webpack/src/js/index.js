@@ -41,7 +41,9 @@ request.send();
 
 
 
-// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
+
+
+/*// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
 var request1 = new XMLHttpRequest();
 request1.open('GET', 'http://mockbin.com/bin/a61c099a-74a5-43a4-865b-0f723572a381', true);
 
@@ -50,7 +52,6 @@ request1.onload = function() {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
- //  document.getElementById('online_users').innerHTML = response1.split('},').length;
     JSON.parse(response1).forEach(
       function (obj) {
         var ul = document.getElementById('chat_online_ul');
@@ -65,6 +66,11 @@ request1.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request1.send();
+*/
+
+
+
+
 
  //передача на сервер
 /*var xhr = new XMLHttpRequest(); 
