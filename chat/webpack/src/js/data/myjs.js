@@ -4,7 +4,33 @@ var your_nik = your_name.value;
 return your_nik;
 }
 
+/*function send_nik_server(){
+//передача на сервер user
+var xhr = new XMLHttpRequest(); 
+xhr.onreadystatechange = function () { 
+   if (this.readyState != 4) return; 
+   if (this.status == 200 || this.status == 201) {
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+    } 
+ };
+ xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user", true); 
+ xhr.setRequestHeader('Content-Type', 'application/json');
+ xhr.send(JSON.stringify(
+ { 
+    "user_id": "pav"
+  }
+  ));
+ //передача на сервер 
+}
+input_chat.addEventListener("click", send_nik_server);*/
 
+
+var date_nowISO = function (){
+	var now = new Date();
+    var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
+    return time_ISO;
+}
 
 var date_now = function (){
 	var now = new Date();
@@ -28,19 +54,16 @@ var date_now = function (){
     } else {
     	seconds = seconds;
     } 
-    var time_now = hours + ":" + minutes + ":" + seconds;
+    var time_now = hours + ":" + minutes;
   	return time_now;
 }
 
 
 
 var send_massage = function send_massage(){ 
-	//var date = new Date().getHours()+":"+new Date().getMinutes();
 
 	var text = text1.value; //берем данные из textarea
-	var new_li = document.createElement('li');  // создаем div
-	var new_li_1 = document.createElement('li');  // создаем div
-	var author = "You";
+	var new_li = document.createElement('li');  // создаем li
 	var symbol = text1.value.length;  //количество символов
 	var reg_space = /\s/g; //проверка пробелов
 	if (text1.value.match(reg_space)){  //считаем пробелы
@@ -49,54 +72,36 @@ var send_massage = function send_massage(){
 		var reg_space_l = 0;
 	}
 	var space = reg_space_l; //количество пробелов
+	
 	if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
 		new_li.className = "chat-message-all"; // присваиваем class
-	 //   new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";  // заполняем div
-		
-
-	
-		
+			
 	    var	date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
-	//	var date_pre_last = date_old[date_old.length-2].innerHTML; // дата предпоследнего последнего сообщения	
-	//    var date_last = date_old[date_old.length-1].innerHTML; // дата последнего сообщения		
-	//    var date_now1 = +new Date();
-	 	
-		
+			
 		var li_old = chat_online_ul.getElementsByClassName('chat-message-all'); // НАЛИЧИЕ БЛОКОВ С ИМЕНЕМ  chat-message-all
-		alert(li_old[li_old.length-1].innerHTML + li_old.length);
 		
-		 if(+new Date() - date_old[date_old.length-1].innerHTML < 10000){
+		if (li_old.length ==0){ //проверка на наличие первого элемента
+			new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
+			chat_online_ul.appendChild(new_li); //записываем в конец
+	   		chat_online_ul.scrollIntoView(false);
 
+		}else if(+new Date() - date_old[date_old.length-1].innerHTML < 10000){
 		var text_old = chat_online_ul.getElementsByClassName('chat_message'); // все сообщения
-		var text_last = text_old[text_old.length-1].innerHTML; // тектс последнего сообщения		
-		
-		//var li_old = chat_online_ul.getElementsByClassName('chat-message-all'); // все сообщения
+		var text_last = text_old[text_old.length-1].innerHTML; // тектс последнего сообщения			
 		var li_last = li_old[li_old.length-1].innerHTML; // тектс последнего сообщения
-
 		new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text_last + "</br>" + text + "</span><span class='date'>" + date_now() + "</span>"; 
-		
-		
 		chat_online_ul.appendChild(new_li); //записываем в конец
 		chat_online_ul.replaceChild(li_old[li_old.length-1], li_old[li_old.length-2]);  // ЗАМЕНЯЕМ ПОСЛЕДНЮЮ ЗАПИСЬ
 		chat_online_ul.scrollIntoView(false);
      	
-		
-		/*setTimeout(function() {
-	    chat_online_ul.removeChild(li_old[li_old.length-1]);
-	  	}, 2000);*/
-		
-	  
-			}else{
+     	}else{
 			new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
 			chat_online_ul.appendChild(new_li); //записываем в конец
 	   		chat_online_ul.scrollIntoView(false);
 			}	
 
-//	new_li.innerHTML ="<span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>"; 	
-//	chat_online_ul.appendChild(new_li); //записываем в конец
-//	chat_online_ul.scrollIntoView(false);	 
 	    //передача на сервер
-	  //  send_massage_server();
+	    send_massage_server();
 	  
 		 //передача на сервер
 	}
@@ -124,7 +129,7 @@ function send_massage_server(){
 		 xhr.setRequestHeader('Content-Type', 'application/json');
 		 xhr.send(JSON.stringify(
 		 { 
-		    "datetime": date_now(), 
+		    "datetime": date_nowISO(), 
 		    "message": text,
 		    "user_id": your_nik()
 		  }
@@ -250,7 +255,7 @@ setInterval(timeonline, 0);
 
 function getSelectionText1() { //такая конструкция работает с textarea
   
-var selRange = 0, selStart = 0, selEnd = 0;
+var selStart = 0, selEnd = 0;
 selStart = text1.selectionStart;
 selEnd = text1.selectionEnd;
 var textselect = text1.value.substr(selStart, selEnd-selStart);
@@ -263,7 +268,10 @@ if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если е�
    var newHtmlText = htmlText.replace(textselect, '<b>' + textselect + '</b>');
   }
   if(this.getAttribute('Class') == 'format-underline'){ //для подчеркивания
-   var newHtmlText = htmlText.replace(textselect, '<u>' + textselect + '</u');
+   var newHtmlText = htmlText.replace(textselect, '<u>' + textselect + '</u>');
+  }
+  if(this.getAttribute('Class') == 'format-link'){ //для подчеркивания
+   var newHtmlText = htmlText.replace(textselect, '<a href="#">' + textselect + '</a>');
   }
 
 	text1.value = newHtmlText;  //куда записывать
@@ -272,3 +280,4 @@ if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если е�
 select_i.addEventListener("click", getSelectionText1);
 select_b.addEventListener("click", getSelectionText1);
 select_u.addEventListener("click", getSelectionText1);
+select_link.addEventListener("click", getSelectionText1);

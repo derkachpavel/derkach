@@ -1,6 +1,6 @@
 
 
-var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
+//var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
 var send_massage = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 //var count = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 //var datenow = require('./data/myjs');
@@ -16,7 +16,7 @@ var send_massage = require('./data/myjs');  // Подключение самос
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
 var request = new XMLHttpRequest();
-request.open('GET', 'http://mockbin.com/bin/b23dd106-4ac5-431f-baea-600457e4e834', true);
+request.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/user', true);
 
 request.onload = function() {
   if (request.status >= 200 && request.status < 400) {
@@ -43,19 +43,22 @@ request.send();
 
 
 
-/*// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
+
+// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
 var request1 = new XMLHttpRequest();
-request1.open('GET', 'http://mockbin.com/bin/a61c099a-74a5-43a4-865b-0f723572a381', true);
+request1.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
 
 request1.onload = function() {
   if (request1.status >= 200 && request1.status < 400) {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
+ //  document.getElementById('online_users').innerHTML = response1.split('},').length;
     JSON.parse(response1).forEach(
       function (obj) {
         var ul = document.getElementById('chat_online_ul');
-        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${obj.time}</span></li>`;
+        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${obj.datetime}</span></li>`;
+      chat_online_ul.scrollIntoView(false);
       }
     )
   } else {
@@ -66,24 +69,22 @@ request1.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request1.send();
-*/
 
 
 
 
-
- //передача на сервер
-/*var xhr = new XMLHttpRequest(); 
-xhr.onreadystatechange = function () { 
+ //передача на сервер user
+/*var xhr1 = new XMLHttpRequest(); 
+xhr1.onreadystatechange = function () { 
    if (this.readyState != 4) return; 
    if (this.status == 200 || this.status == 201) {
       var data = JSON.parse(this.responseText);
       console.log(data);
     } 
  };
- xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/messages", true); 
- xhr.setRequestHeader('Content-Type', 'application/json');
- xhr.send(JSON.stringify(
+ xhr1.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user", true); 
+ xhr1.setRequestHeader('Content-Type', 'application/json');
+ xhr1.send(JSON.stringify(
  { 
     "datetime": "2017-02-23T16:21:34.550Z", 
     "message": "Some text",
