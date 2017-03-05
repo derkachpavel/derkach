@@ -35,12 +35,19 @@ header {
 	margin-top: 15px;
 	margin-left: 18px;
 }
-.pers-private a{
+
+a.pers-info {
 	color: white;
 }
-.private-mess span{
+
+.hello-user{
+	color: white;
+}
+
+.hello-user span{
 	margin-left: 5px;
 }
+
 .logo {
 	position: absolute;
 	top: 3px;
@@ -52,10 +59,21 @@ header {
 	position: absolute;
 	top: 145px;
 	left: 0;
-	width: 151px;
+	width: 108px;
 	height: 20px;
 	padding-left: 20px;
 	border: solid 1px #cecbcb;
+}
+
+.input_name_enter {
+	position: absolute;
+	top: 145px;
+	left: 132px;
+	width: 40px;
+	height: 22px;
+    background: #457679;
+    box-shadow: 9px 9px 9px -9px #000000;
+    color: white;
 }
 
 .user-chat{
@@ -66,37 +84,45 @@ header {
 	height: 321px;
 	background: #457679;
 	box-shadow: 9px 10px 14px -9px #000000;
-	overflow: auto;
+
 }
 
 .away {  // стиль для неактивного
 	color:orange;
 }
+
+
 p.online-user{
-	position: fixed;
 	font-size: 11px;
-	padding-top: 10px;
-	margin-left: 13px;
-	width: 141px;
-	height: 21px;
+	margin-left: 21px;
+	margin-top:5px;
 	color: white;
-	background: #457679;
-	z-index: 100;
 }
 
 div.list-uder{
-	margin:10px auto;
-	width: 150px;
+	width: 142px;
 	background: #fff;
 }
 
-.list-uder ul{
+div.list-uder-wr {
 	position: absolute;
-	top:28px;
-	margin:0px 10px 10px 10px;
-	padding: 10px;
-	background:  #fff;
+	top:23px;
+	left:14px;
+	width:144px;
+    height: 284px;
+	overflow: auto;
+} 
+
+.list-uder ul{
+	min-height:283px;
+	min-width: 127px;
 }
+
+.list-uder ul li{
+	margin-left:8px;
+	padding-top:8px;	
+}
+
 
 
 div.chat{
@@ -257,7 +283,7 @@ ul.format-message{
 	overflow:hidden;
 	position:absolute;
 	margin-left:130px;
-	z-index: 1000;
+	z-index: 1;
 }
 
 ul.format-message li{
@@ -312,4 +338,87 @@ div.entered-message {
 	left:182px;
 	font-size: 13px;
 	font-weight: 200;
+}
+
+
+// модальное окно
+
+.modal_1 {
+    position:absolute;
+	top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    pointer-events: none;
+    display: none;
+    z-index: 2;
+}
+	
+.modal_1:target {
+    display: block;
+    pointer-events: auto;
+    z-index: 2;
+}
+	
+	
+.modalokno_1 {
+    width: 350px;
+    position: relative;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    z-index: 2;
+}
+
+	
+.close_1 {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px #000;
+	opacity:.5;
+	z-index: 2;
+}
+.close_1:hover{ 
+    background: #457679; 
+    transition: opacity 1s ease;
+    opacity:1;
+    z-index: 2;
+}
+.modalokno_1 h2{
+	color: #457679;
+}
+
+.input_reg p{
+	margin-top:10px;
+}
+
+.input_reg input{
+	margin-left:5px;
+}
+
+.input_reg input {
+	text-align: center;
+}
+.modalokno_1{
+	text-align:center;
+}
+
+#input_reg{
+	margin-top:15px;
+    width: 150px;
+    height: 25px;
+    background: #457679;
+    box-shadow: 9px 9px 9px -9px #000000;
+    color: white;
 }

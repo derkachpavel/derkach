@@ -1,10 +1,40 @@
 
-function your_nik(){
+function your_nik(){ //возвращает имя пользователя
 var your_nik = your_name.value;
 return your_nik;
 }
 
-/*function send_nik_server(){
+function hello_user(){//записывает имя в приветствие
+enter_user.innerHTML = your_nik();
+}
+your_name_enter.addEventListener("click", hello_user);
+
+
+function register_open(){// открытие модального окна
+modal_1.style.display = "block";
+}
+open_reg.addEventListener("click", register_open);  // открыть при редактировании
+
+function register_close(){ // закрыть модальное окно крестиком
+modal_1.style.display = "none";
+}
+close_1.addEventListener("click", register_close);
+
+
+function register_user(){ // регистрация в модальном окне
+if(your_name_reg.value && your_email_reg.value && your_birthday_reg.value){
+enter_user.innerHTML = your_name_reg.value;
+register_close();
+}else{
+alert("Заполните Все поля!");
+}
+
+}
+input_reg.addEventListener("click", register_user);
+
+
+
+function send_nik_server(){
 //передача на сервер user
 var xhr = new XMLHttpRequest(); 
 xhr.onreadystatechange = function () { 
@@ -14,16 +44,16 @@ xhr.onreadystatechange = function () {
       console.log(data);
     } 
  };
- xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user", true); 
+ xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user/register", true); 
  xhr.setRequestHeader('Content-Type', 'application/json');
  xhr.send(JSON.stringify(
  { 
-    "user_id": "pav"
-  }
+    "username": your_nik()
+   }
   ));
  //передача на сервер 
 }
-input_chat.addEventListener("click", send_nik_server);*/
+your_name_enter.addEventListener("click", send_nik_server);
 
 
 var date_nowISO = function (){
@@ -116,7 +146,6 @@ input_chat.addEventListener("click", send_massage);
 function send_massage_server(){
 		//передача на сервер
 		var text = text1.value; //берем данные из textarea
-		var author = "You";
 	    var xhr = new XMLHttpRequest(); 
 		xhr.onreadystatechange = function () { 
 		   if (this.readyState != 4) return; 
@@ -131,11 +160,10 @@ function send_massage_server(){
 		 { 
 		    "datetime": date_nowISO(), 
 		    "message": text,
-		    "user_id": your_nik()
+		    "user_id":"106440716"
 		  }
 		  ));
 		 //передача на сервер
-
 }
 
 

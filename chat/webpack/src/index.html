@@ -13,8 +13,8 @@
 				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
 			</div>
 			<div class="pers-private">
-				<p><a class="pers-info" href="">Edit personal info</a></p>
-				<p><a class="private-mess" href="">Private messages<span>(3)</span></a></p>
+				<p><a id="open_reg" class="pers-info" href="#modal_1">Edit personal info</a></p>
+				<p class="hello-user">Hello:<span id="enter_user"></span></p>
 			</div>
 			<div class="logo">
 				<img src="images/hobnob.png">
@@ -22,20 +22,19 @@
 
 		</header>
 		<input id="your_name" type="text" name="your_name" class="input_name" placeholder="enter your name" />
+		<input id="your_name_enter" type="button" class="input_name_enter" value="ok" />
 		<div class="user-chat">
 			<div class="online-user">
-				<p class="online-user">Online:<span id="online_users"></span></p>
+				<p class="online-user">Online:<span id="online_users">5</span></p>
 			</div>
-
+			<div class="list-uder-wr">
 				<div class="list-uder">
 					<ul id="using-pure-js">
-						<!-- <li class="list-uder online">John Snow</li>
-						<li class="list-uder online">Andrew Simpson</li>
-						<li class="list-uder online">Alison Black</li>
-						<li class="list-uder departed">Sasha Stuart</li> -->
+						<li>fegfwe</li>
+						<li>fegfwe</li>
 					</ul>
 				</div>
-			
+			</div>
 		</div>
 
 		<div class="chat">
@@ -91,6 +90,21 @@
 
 	</div>
 
+	<div style ="display: none" id="modal_1" class="modal_1">
+		<div class="modalokno_1"> 
+        	<a id="close_1" href="#" title="Закрыть" class="close_1">X</a>
+	        <h2>Registration</h2>
+	        	<form id="reg_form" class="input_reg">
+			        <p>Enter name:<input id="your_name_reg" type="text" name="your_name" placeholder="enter your name" /></p>
+			        
+			        <p>Enter email:<input id="your_email_reg" type="email" name="your_email" placeholder="enter your email" /></p>
+			       
+			        <p>Enter birthday:<input id="your_birthday_reg" type="text" name="your_birthday" placeholder="enter your birthday" /></p>
+			       
+			        <input id="input_reg" type="button" name="send-reg" value="Registration">
+			    </form>    
+		</div>	
+	</div>    
 
 </body>
 </html>

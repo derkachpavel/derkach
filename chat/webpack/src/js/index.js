@@ -40,8 +40,38 @@ request.onerror = function() {
 request.send();
 
 
+/*var request2 = new XMLHttpRequest();
+request2.open('GET', 'http://mockbin.com/bin/a61c099a-74a5-43a4-865b-0f723572a381', true);
+
+request2.onload = function() { //получение сообщений от определенных пользователей
+  if (request2.status >= 200 && request2.status < 400) {
+    // Обработчик успещного ответа
+    var response2 = request2.responseText;
+    console.log(response2);
+ //  document.getElementById('online_users').innerHTML = response1.split('},').length;
+    JSON.parse(response2).forEach(
+      function (obj) {
+        var msUTC = Date.parse(`${obj.time}`);
+        if(`${obj.user}`==1 && msUTC>1487236547000){
+        
+        alert(msUTC+ new Date());
+        var ul = document.getElementById('chat_online_ul');
+        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${obj.time}</span></li>`;
+       chat_online_ul.scrollIntoView(false);
+    }
+      }
+    )
+  } else {
+    // Обработчик ответа в случае ошибки
+  }
+};
+request2.onerror = function() {
+  // Обработчик ответа в случае неудачного соеденения
+};
+request2.send();
 
 
+*/
 
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
@@ -56,6 +86,9 @@ request1.onload = function() {
  //  document.getElementById('online_users').innerHTML = response1.split('},').length;
     JSON.parse(response1).forEach(
       function (obj) {
+        var d = Date.parse(`${obj.datetime}`);
+        
+        console.log(d);
         var ul = document.getElementById('chat_online_ul');
         ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${obj.datetime}</span></li>`;
       chat_online_ul.scrollIntoView(false);
