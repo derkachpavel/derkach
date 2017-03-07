@@ -40,6 +40,75 @@ request.onerror = function() {
 request.send();
 
 
+
+
+
+// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
+var request1 = new XMLHttpRequest();
+request1.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
+
+request1.onload = function() {
+  if (request1.status >= 200 && request1.status < 400) {
+    // Обработчик успещного ответа
+    var response1 = request1.responseText;
+    console.log(response1);
+ //  document.getElementById('online_users').innerHTML = response1.split('},').length;
+    JSON.parse(response1).forEach(
+      function (obj) {
+        
+        //var d2 = Date.parse(obj.datetime);
+        var d1 = new Date(obj.datetime); // берм время с сервера в нужном формате
+        var d_hours = d1.getHours();
+        if (d_hours < 10){
+          d_hours ="0" + d_hours; 
+        } else{
+           d_hours =d_hours; 
+        }
+        var d_min = d1.getMinutes(); 
+        if (d_min < 10){
+          d_min ="0" + d_min; 
+        } else{
+           d_min =d_min; 
+        }
+        var d = d_hours + ":" + d_min;  // дата час : минуты
+        var ul = document.getElementById('chat_online_ul');
+        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+       chat_online_ul.scrollIntoView(false);
+      }
+    )
+  } else {
+    // Обработчик ответа в случае ошибки
+  }
+};
+request1.onerror = function() {
+  // Обработчик ответа в случае неудачного соеденения
+};
+request1.send();
+
+
+function send_massage_server(){
+    //передача на сервер
+    var text = text1.value; //берем данные из textarea
+      var xhr = new XMLHttpRequest(); 
+    xhr.onreadystatechange = function () { 
+       if (this.readyState != 4) return; 
+       if (this.status == 200 || this.status == 201) {
+          var data = JSON.parse(this.responseText);
+          console.log(data);
+        } 
+     };
+     xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/messages", true); 
+     xhr.setRequestHeader('Content-Type', 'application/json');
+     xhr.send(JSON.stringify(
+     { 
+        "datetime": date_nowISO(), 
+        "message": text,
+        "user_id":"106440716"
+      }
+      ));
+     //передача на сервер
+}
+
 /*var request2 = new XMLHttpRequest();
 request2.open('GET', 'http://mockbin.com/bin/a61c099a-74a5-43a4-865b-0f723572a381', true);
 
@@ -72,39 +141,6 @@ request2.send();
 
 
 */
-
-
-// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
-var request1 = new XMLHttpRequest();
-request1.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
-
-request1.onload = function() {
-  if (request1.status >= 200 && request1.status < 400) {
-    // Обработчик успещного ответа
-    var response1 = request1.responseText;
-    console.log(response1);
- //  document.getElementById('online_users').innerHTML = response1.split('},').length;
-    JSON.parse(response1).forEach(
-      function (obj) {
-        var d = Date.parse(`${obj.datetime}`);
-        
-        console.log(d);
-        var ul = document.getElementById('chat_online_ul');
-        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${obj.datetime}</span></li>`;
-      chat_online_ul.scrollIntoView(false);
-      }
-    )
-  } else {
-    // Обработчик ответа в случае ошибки
-  }
-};
-request1.onerror = function() {
-  // Обработчик ответа в случае неудачного соеденения
-};
-request1.send();
-
-
-
 
  //передача на сервер user
 /*var xhr1 = new XMLHttpRequest(); 

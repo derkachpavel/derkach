@@ -15,6 +15,7 @@ modal_1.style.display = "block";
 }
 open_reg.addEventListener("click", register_open);  // открыть при редактировании
 
+
 function register_close(){ // закрыть модальное окно крестиком
 modal_1.style.display = "none";
 }
@@ -23,14 +24,15 @@ close_1.addEventListener("click", register_close);
 
 function register_user(){ // регистрация в модальном окне
 if(your_name_reg.value && your_email_reg.value && your_birthday_reg.value){
-enter_user.innerHTML = your_name_reg.value;
-register_close();
-}else{
-alert("Заполните Все поля!");
-}
+	enter_user.innerHTML = your_name_reg.value;
+	register_close();
+	}else{
+		alert("Заполните Все поля!");
+		}
 
 }
 input_reg.addEventListener("click", register_user);
+
 
 
 
@@ -54,6 +56,8 @@ xhr.onreadystatechange = function () {
  //передача на сервер 
 }
 your_name_enter.addEventListener("click", send_nik_server);
+
+
 
 
 var date_nowISO = function (){
@@ -131,7 +135,8 @@ var send_massage = function send_massage(){
 			}	
 
 	    //передача на сервер
-	    send_massage_server();
+	    
+	    //send_massage_server();
 	  
 		 //передача на сервер
 	}
@@ -143,7 +148,7 @@ input_chat.addEventListener("click", send_massage);
 
 
 
-function send_massage_server(){
+/*function send_massage_server(){
 		//передача на сервер
 		var text = text1.value; //берем данные из textarea
 	    var xhr = new XMLHttpRequest(); 
@@ -164,7 +169,7 @@ function send_massage_server(){
 		  }
 		  ));
 		 //передача на сервер
-}
+}*/
 
 
 text1.addEventListener("keydown", function TAKeyDown(event) {  
