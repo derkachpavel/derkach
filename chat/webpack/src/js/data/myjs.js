@@ -1,11 +1,25 @@
 
-function your_nik(){ //возвращает имя пользователя
-var your_nik = your_name.value;
-return your_nik;
+function testuser(){ //как извлечь данные при нажатии?
+	var last = using_pure_js.getElementsByTagName('li').length;
+	var last1 = using_pure_js.getElementsByTagName('li')[last-1].innerHTML;
+	var testli = this.innerHTML;
+	alert(testli);
 }
 
+using_pure_js.addEventListener("click", testuser);
+
+
+
+function testlast(){
+	var last = chat_online_ul.getElementsByClassName('date_pull').length;
+	var last1 = chat_online_ul.getElementsByClassName('date_pull')[last-1].innerHTML;
+	alert("Время последнего сообщения :" + last1);
+}
+your_name_enter.addEventListener("click", testlast);
+
+
 function hello_user(){//записывает имя в приветствие
-enter_user.innerHTML = your_nik();
+enter_user.innerHTML = your_name.value;
 }
 your_name_enter.addEventListener("click", hello_user);
 
@@ -35,10 +49,10 @@ input_reg.addEventListener("click", register_user);
 
 
 
-
 function send_nik_server(){
 //передача на сервер user
 var xhr = new XMLHttpRequest(); 
+var nik = your_name.value;
 xhr.onreadystatechange = function () { 
    if (this.readyState != 4) return; 
    if (this.status == 200 || this.status == 201) {
@@ -50,7 +64,7 @@ xhr.onreadystatechange = function () {
  xhr.setRequestHeader('Content-Type', 'application/json');
  xhr.send(JSON.stringify(
  { 
-    "username": your_nik()
+    "username": nik
    }
   ));
  //передача на сервер 
@@ -136,7 +150,7 @@ var send_massage = function send_massage(){
 
 	    //передача на сервер
 	    
-	    //send_massage_server();
+	   // send_massage_server();
 	  
 		 //передача на сервер
 	}
@@ -148,7 +162,7 @@ input_chat.addEventListener("click", send_massage);
 
 
 
-/*function send_massage_server(){
+function send_massage_server(){
 		//передача на сервер
 		var text = text1.value; //берем данные из textarea
 	    var xhr = new XMLHttpRequest(); 
@@ -163,13 +177,13 @@ input_chat.addEventListener("click", send_massage);
 		 xhr.setRequestHeader('Content-Type', 'application/json');
 		 xhr.send(JSON.stringify(
 		 { 
-		    "datetime": date_nowISO(), 
 		    "message": text,
-		    "user_id":"106440716"
+		    "user_id":"106440716",
+		    "datetime": date_nowISO()
 		  }
 		  ));
 		 //передача на сервер
-}*/
+}
 
 
 text1.addEventListener("keydown", function TAKeyDown(event) {  
