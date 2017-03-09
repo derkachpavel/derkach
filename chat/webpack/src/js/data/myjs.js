@@ -1,5 +1,5 @@
 
-function testuser(){ //как извлечь данные при нажатии?
+/*function testuser(){ //как извлечь данные при нажатии?
 	var last = using_pure_js.getElementsByTagName('li').length;
 	var last1 = using_pure_js.getElementsByTagName('li')[last-1].innerHTML;
 	var testli = this.innerHTML;
@@ -7,6 +7,16 @@ function testuser(){ //как извлечь данные при нажатии?
 }
 
 using_pure_js.addEventListener("click", testuser);
+
+
+
+
+function testmess(){
+	
+	online_1.style.display = "block";
+	online_main.style.display = "none";
+}
+your_name_enter.addEventListener("click", testmess);
 
 
 
@@ -328,3 +338,4 @@ select_i.addEventListener("click", getSelectionText1);
 select_b.addEventListener("click", getSelectionText1);
 select_u.addEventListener("click", getSelectionText1);
 select_link.addEventListener("click", getSelectionText1);
+*/
