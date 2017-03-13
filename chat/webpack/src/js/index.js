@@ -1,17 +1,7 @@
 
 
-//var users = require('./data/users');  // Подключение самостоятельно созданного модуля "users"
-   //var send_massage = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
-//var count = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
-//var datenow = require('./data/myjs');
- 
 
- /*users.data.forEach(
-  function (obj) {
-    var ul = document.getElementById('from-file');
-    ul.innerHTML += `<li>${obj.name} ${obj.status}</li>`;
-  }
-) */
+//var send_massage = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
@@ -23,29 +13,28 @@ request.onload = function pull_user() { //загрузка пользовате�
     // Обработчик успещного ответа
     var response = request.responseText;
     console.log(response);
-//    alert (response);
     online_users.innerHTML = response.split('},').length;
+    user_send.innerHTML = response; // заносим пользователей в div
     JSON.parse(response).forEach(
       function (obj) {
         var ul = document.getElementById('using_pure_js');
-        ul.innerHTML += `<a href="#"><li class="${obj.status}">${obj.username} : ${obj.user_id}</li></a>`;
+        ul.innerHTML += `<a id="id${obj.username}" href="#"><li class="${obj.status}">${obj.username}</li></a>`;
         using_pure_js.scrollIntoView(false);
       }
     )
   } else {
+  
     // Обработчик ответа в случае ошибки
   }
 };
+
+
 request.onerror = function() {
+  alert("Нет соединения с сервером 'https://main-workspace-juggerr.c9users.io:8081/user'"+ "Стату:" + request.status);
+   console.log("Нет соединения с сервером'https://main-workspace-juggerr.c9users.io:8081/user' "+"Стату:" + request.status);
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
-
-//your_name_enter.addEventListener("click", pull_user);
-//setInterval(pull_user, 100);
-
-
-var q = "внешняя переменная";
 
 
 
@@ -58,26 +47,7 @@ request1.onload = function pull_message() {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
-    var response = request.responseText;
- 
 
-    function ww(){
-    var ttt ="внутренняя переменная"
-    return ttt
-    }
-    var qq = ww();
-  //  alert(qq);
-
-    
-/*    JSON.parse(response).forEach(
-      function (obj1) {
-        var l = obj1.username;
-        var l2 = obj1.user_id;
-     		var ll = l + " :" + l2;
-       console.log(ll);
-      }
-    )*/
-  
 
 
     JSON.parse(response1).forEach(
@@ -96,26 +66,24 @@ request1.onload = function pull_message() {
            d_min =d_min; 
         }
         var d = d_hours + ":" + d_min;  // дата час : минуты
+        var user =  obj.user_id;    
+        var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
         
-       
-//       console.log("alert response" + response);
-
-
-
-        var new_user_id = obj.user_id;  // пытаемся вставить имя вместо ID
-        if (obj.user_id == -1014275887){
-           var new_user_id = "Новый пользователь";
-        //   alert (JSON.parse(response));
+        function Elem1(elem) {  // для замены id на имя пользователя
+          var user1 = elem.user_id;
+          if(user == user1){
+          user =  elem.username; // user_name_repl глобальная переменая
+          }
         }
+        JSON.parse(arr_user).forEach(Elem1);
 
         var ul = document.getElementById('chat_online_ul');
-        if(obj.user_id == 106440716){ // user_id отправителя  задаем классы для стилей
+        if(obj.user_id == 106440716){ // user_id отправителя  задаем классы для стилей пользователя
     
         ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden">${+new Date()}</span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
         chat_online_ul.scrollIntoView(false);
-        	}else{ // задаем классы для стилей
-        
-        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${new_user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+        	}else{ // задаем классы для стилей осталных пользователей
+        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
         chat_online_ul.scrollIntoView(false);
         }
       }
@@ -128,6 +96,9 @@ request1.onload = function pull_message() {
 };
 
 request1.onerror = function() {
+   alert("Нет соединения с сервером 'https://main-workspace-juggerr.c9users.io:8081/messages' "+ "Стату:" + request.status);
+   console.log("Нет соединения с сервером'https://main-workspace-juggerr.c9users.io:8081/messages' "+"Стату:" + request.status);
+ 
   // Обработчик ответа в случае неудачного соеденения
 };
 
@@ -182,14 +153,26 @@ function add_message() { //добавление сообщений сообще�
         
               console.log(msUTC + ":" +msUTC1);
 
-             var ul = document.getElementById('chat_online_ul');
+
+
+   //           var ul = document.getElementById('chat_online_ul');
+              
+              var newli = document.createElement('li');
+              newli.innerHTML = 'Привет !';
+              chat_online_ul.appendChild(newli);
+             
+
               if(obj.user_id == 106440716){ // user_id отправителя  задаем классы для стилей
           
-              ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden"></span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+              //ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden"></span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+              newli.innerHTML = 'Привет !';
+              chat_online_ul.appendChild(newli);
               chat_online_ul.scrollIntoView(false);
                 }else{ // задаем классы для стилей
               
-              ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${msUTC}:${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+              //ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${msUTC}:${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+              newli.innerHTML = 'Привет !';
+              chat_online_ul.appendChild(newli);
               chat_online_ul.scrollIntoView(false);
               }
 
@@ -206,59 +189,21 @@ request2.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request2.send();
-//your_name_enter.addEventListener("click", add_message);
+your_name_enter.addEventListener("click", add_message);
 //setInterval(add_message, 6000);
 
 //           ТЕСТ
 
 
 
- //передача на сервер user
-/*var xhr1 = new XMLHttpRequest(); 
-xhr1.onreadystatechange = function () { 
-   if (this.readyState != 4) return; 
-   if (this.status == 200 || this.status == 201) {
-      var data = JSON.parse(this.responseText);
-      console.log(data);
-    } 
- };
- xhr1.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user", true); 
- xhr1.setRequestHeader('Content-Type', 'application/json');
- xhr1.send(JSON.stringify(
- { 
-    "datetime": "2017-02-23T16:21:34.550Z", 
-    "message": "Some text",
-    "user_id": "Alexxxxxxx"
-  }
-  ));*/
- //передача на сервер 
-
-/*var $ = require('jquery');  // Подключение установленной библиотеки jQuery
-
-// Выполняется AJAX запрос к внешнему ресурсу c помощью jQuery
-$.ajax({
-  type: 'GET',
-  url: 'http://mockbin.com/bin/35ea6adb-2b94-4c48-93f7-4b02b4849e3e',
-  success: function(response) {  // Обработчик успещного ответа
-    console.log(response); // Вывод содержимого ответа в консоль
-
-    $.parseJSON(response).forEach(
-      function (obj) {
-        $("#using-jquery").append(`<li>${obj.name} ${obj.status}</li>`);
-      }
-    )
-  },
-  error: function(data, status) {  // Обработчик ответа в случае ошибки
-    console.error(data, status);
-  }
-});*/
 
 
 function testuser(){ //как извлечь данные при нажатии?
   var last = using_pure_js.getElementsByTagName('li').length;
   var last1 = using_pure_js.getElementsByTagName('li')[last-1].innerHTML;
-  var testli = this.innerHTML;
-  alert(testli);
+  var testli = this.innerText;
+  var testli1 = this.getAttribute('id');
+  alert(testli1);
 }
 
 using_pure_js.addEventListener("click", testuser);
@@ -281,6 +226,8 @@ function testlast(){
   alert("Время последнего сообщения :" + last1);
 }
 your_name_enter.addEventListener("click", testlast);
+
+
 
 
 function hello_user(){//записывает имя в приветствие
@@ -389,7 +336,7 @@ var send_massage = function send_massage(){
   if (symbol >= 1 && symbol != space) {  //если символов больше или равно 1 и не равно количеству пробелов
     new_li.className = "chat-message-all"; // присваиваем class
       
-      var date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
+    var date_old = chat_online_ul.getElementsByClassName('date_hidden');// все даты
       
     var li_old = chat_online_ul.getElementsByClassName('chat-message-all'); // НАЛИЧИЕ БЛОКОВ С ИМЕНЕМ  chat-message-all
     
@@ -401,7 +348,7 @@ var send_massage = function send_massage(){
     }else if(+new Date() - date_old[date_old.length-1].innerHTML < 10000){
     var text_old = chat_online_ul.getElementsByClassName('chat_message'); // все сообщения
     var text_last = text_old[text_old.length-1].innerHTML; // тектс последнего сообщения      
-    var li_last = li_old[li_old.length-1].innerHTML; // тектс последнего сообщения
+    //var li_last = li_old[li_old.length-1].innerHTML; // тектс последнего сообщения
     new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text_last + "</br>" + text + "</span><span class='date'>" + date_now() + "</span>"; 
     chat_online_ul.appendChild(new_li); //записываем в конец
     chat_online_ul.replaceChild(li_old[li_old.length-1], li_old[li_old.length-2]);  // ЗАМЕНЯЕМ ПОСЛЕДНЮЮ ЗАПИСЬ
@@ -584,7 +531,7 @@ if (textselect = text1.value.substr(selStart, selEnd-selStart)){ // если е�
    var newHtmlText = htmlText.replace(textselect, '<u>' + textselect + '</u>');
   }
   if(this.getAttribute('Class') == 'format-link'){ //для подчеркивания
-   var newHtmlText = htmlText.replace(textselect, '<a href="#">' + textselect + '</a>');
+   var newHtmlText = htmlText.replace(textselect, '<a href="'+ textselect +'">' + textselect + '</a>');
   }
 
   text1.value = newHtmlText;  //куда записывать

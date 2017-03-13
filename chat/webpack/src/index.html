@@ -8,6 +8,7 @@
 
 	<div class="wrapper">
 		<header>
+		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
 			<div class="time">
 				<p class="online-time">You are online for: <span id="online_time">1h 30m</span></p>
 				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
@@ -97,12 +98,15 @@
 				<input id="input_chat" type="button" name="send-message" value="Send message">	
 			</form>		
 		</div>
+
 		<div class="entered-message">
 			<div class="quantity-symbols"><p><span id="symbol" class="quantity">0</span> characters entered</p></div>
 			<div class="quantity-letter"><p><span id="letter" class="quantity">0</span> letters entered</p></div>
 			<div class="quantity-hidden"><p><span id="space" class="quantity">0</span> whitespace characters entered</p></div>
 			<div class="quantity-punctuation"><p><span id="punctuation" class="quantity">0</span> punctuation marks entered</p></div>
 		</div>
+		
+
 
 	</div>
 
