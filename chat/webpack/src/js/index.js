@@ -18,7 +18,7 @@ request.onload = function pull_user() { //загрузка пользовате�
     JSON.parse(response).forEach(
       function (obj) {
         var ul = document.getElementById('using_pure_js');
-        ul.innerHTML += `<a id="id${obj.username}" href="#"><li class="${obj.status}">${obj.username}</li></a>`;
+        ul.innerHTML += `<a id="id${obj.user_id}" href="#"><li class="${obj.status}">${obj.username}</li></a>`;
         using_pure_js.scrollIntoView(false);
       }
     )
@@ -83,7 +83,7 @@ request1.onload = function pull_message() {
         ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden">${+new Date()}</span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
         chat_online_ul.scrollIntoView(false);
         	}else{ // задаем классы для стилей осталных пользователей
-        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+        ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(d1)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
         chat_online_ul.scrollIntoView(false);
         }
       }
@@ -107,7 +107,7 @@ request1.send();
   
 
 
-//           ТЕСТ
+//           ТЕСТ добавления сообщений
 
 var request2 = new XMLHttpRequest();
 request2.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
@@ -138,40 +138,43 @@ function add_message() { //добавление сообщений сообще�
         }
         var d = d_hours + ":" + d_min;  // дата час : минуты
 
-
-
-
-
-        var last = chat_online_ul.getElementsByClassName('date_pull').length;
-        var last1 = chat_online_ul.getElementsByClassName('date_pull')[last-1].innerHTML;
-        console.log("Время последнего сообщения :" + Date.parse(last1));
-
-        var msUTC = Date.parse(`${obj.datetime}`); // время сообщения
-        console.log(msUTC);
-        var msUTC1 = Date.parse(new Date()); // текущая дата
-        if(msUTC>1489062421322){
+        var user =  obj.user_id;    
+        var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
         
-              console.log(msUTC + ":" +msUTC1);
+        function Elem1(elem) {  // для замены id на имя пользователя
+          var user1 = elem.user_id;
+          if(user == user1){
+          user =  elem.username; // user_name_repl глобальная переменая
+          }
+        }
+        JSON.parse(arr_user).forEach(Elem1);
 
+        var last = chat_online_ul.getElementsByClassName('date_hidden').length;
+        var data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
+        var msUTC = Date.parse(`${obj.datetime}`); // время сообщения
+        console.log("Время последнего сообщения в окне:" + data_last+"время сообщения на сервере:"+msUTC);
+        var msUTC1 = Date.parse(new Date()); // текущая дата
 
+     //  console.log("текушая дата"+ msUTC1);
+        if(msUTC>data_last){
+        
 
-   //           var ul = document.getElementById('chat_online_ul');
               
               var newli = document.createElement('li');
-              newli.innerHTML = 'Привет !';
-              chat_online_ul.appendChild(newli);
-             
+       
 
               if(obj.user_id == 106440716){ // user_id отправителя  задаем классы для стилей
-          
+              newli.className = "chat-message-all"; // присваиваем class
               //ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden"></span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-              newli.innerHTML = 'Привет !';
+              
+              newli.innerHTML = `<span class="date_hidden">${+new Date()}</span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span>`;
               chat_online_ul.appendChild(newli);
               chat_online_ul.scrollIntoView(false);
                 }else{ // задаем классы для стилей
+               newli.className = "message_pull_all"; // присваиваем class
               
               //ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${msUTC}:${obj.user_id}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-              newli.innerHTML = 'Привет !';
+              newli.innerHTML = `<span class="date_hidden">${Date.parse(d1)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span>`;
               chat_online_ul.appendChild(newli);
               chat_online_ul.scrollIntoView(false);
               }
@@ -199,13 +202,17 @@ your_name_enter.addEventListener("click", add_message);
 
 
 function testuser(){ //как извлечь данные при нажатии?
-  var last = using_pure_js.getElementsByTagName('li').length;
-  var last1 = using_pure_js.getElementsByTagName('li')[last-1].innerHTML;
-  var testli = this.innerText;
-  var testli1 = this.getAttribute('id');
-  alert(testli1);
+  var i = 5;
+  var last = using_pure_js.getElementsByTagName('a').length;
+  var last1 = using_pure_js.getElementsByTagName('a')[i].getAttribute('id');
+  var testli = event.target.innerText;
+  var testli1 = event.target.getAttribute('id');
+
+  alert(testli);
 }
 
+//var myuser = using_pure_js.getElementsByTagName('a').length;
+//alert (myuser);
 using_pure_js.addEventListener("click", testuser);
 
 
@@ -343,7 +350,7 @@ var send_massage = function send_massage(){
     if (li_old.length ==0){ //проверка на наличие первого элемента
       new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";   
       chat_online_ul.appendChild(new_li); //записываем в конец
-        chat_online_ul.scrollIntoView(false);
+      chat_online_ul.scrollIntoView(false);
 
     }else if(+new Date() - date_old[date_old.length-1].innerHTML < 10000){
     var text_old = chat_online_ul.getElementsByClassName('chat_message'); // все сообщения
@@ -357,12 +364,12 @@ var send_massage = function send_massage(){
       }else{
       new_li.innerHTML ="<span class='date_hidden'>"+ +new Date() + "</span><span class='chat_message'>" + text +"</span><span class='date'>" + date_now() + "</span>";   
       chat_online_ul.appendChild(new_li); //записываем в конец
-        chat_online_ul.scrollIntoView(false);
+      chat_online_ul.scrollIntoView(false);
       } 
 
       //передача на сервер
       
-     // send_massage_server();
+      send_massage_server();
     
      //передача на сервер
   }
@@ -390,7 +397,7 @@ function send_massage_server(){
      xhr.send(JSON.stringify(
      { 
         "message": text,
-        "user_id":"106440716",
+        "user_id":"106440716",  //106440716
         "datetime": date_nowISO()
       }
       ));
