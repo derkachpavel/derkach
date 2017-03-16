@@ -1,4 +1,3 @@
-
 /*function testuser(){ //как извлечь данные при нажатии?
 	var last = using_pure_js.getElementsByTagName('li').length;
 	var last1 = using_pure_js.getElementsByTagName('li')[last-1].innerHTML;
