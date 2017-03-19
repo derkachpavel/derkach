@@ -1,6 +1,6 @@
 
 
-//var send_massage = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
+// var myjs = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
@@ -46,9 +46,6 @@ request1.onload = function pull_message() {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
-
-
-
     JSON.parse(response1).forEach(
       function (obj) {
         var d1 = new Date(obj.datetime); // берем время с сервера в нужном формате
@@ -103,57 +100,18 @@ request1.onerror = function() {
 
 request1.send();
 
-  
-
-//тест как достать последнюю дату
-function add_last_date(){
-var request3 = new XMLHttpRequest();
-request3.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
-
-
-request3.onload = function () { //добавление сообщений сообщений от определенных пользователей
-  if (request3.status >= 200 && request3.status < 400) {
-    // Обработчик успещного ответа
-    var response3 = request3.responseText;
-//    console.log(response2);
-    var date_len = response3.split('},').length; // количество сообщений
-    alert("Всего сообщений:" + date_len);
-    alert (response3);
-    
-/*    JSON.parse(response3).forEach(
-      function (obj) {
-      
-      }
-    )*/
-     
-  } else {
-    // Обработчик ответа в случае ошибки
-  }
-};
-request3.onerror = function() {
-  // Обработчик ответа в случае неудачного соеденения
-};
-request3.send();
-}
-pull_server_date.addEventListener("click", add_last_date);
-//setInterval(add_last_date, 2000);
-
-
-
-//тест как достать последнюю дату
-
 
 
 
 var last_date = function last_date(){ //получение даты из формы 
 var last = chat_online_ul.getElementsByClassName('date_hidden').length;
 var data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
-console.log (data_last);
+//console.log (data_last);
 return data_last;
 }
-pull_last_date.addEventListener("click", last_date);
+//pull_last_date.addEventListener("click", last_date);
 
-//           ТЕСТ добавления сообщений
+// добавления сообщений
 function add_message(){
 var request2 = new XMLHttpRequest();
 request2.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
@@ -162,14 +120,10 @@ request2.onload = function () { //добавление сообщений соо
   if (request2.status >= 200 && request2.status < 400) {
     // Обработчик успещного ответа
     var response2 = request2.responseText;
-//    console.log(response2);
-//    var date_len = response2.split('},').length; // количество сообщений
-//    alert("Всего сообщений:" + date_len);
     
     JSON.parse(response2).forEach(
       function (obj) {
-        
-
+      
         var d1 = new Date(obj.datetime); // берем время с сервера в нужном формате
         var d_hours = d1.getHours();
         if (d_hours < 10){
@@ -197,14 +151,11 @@ request2.onload = function () { //добавление сообщений соо
         JSON.parse(arr_user).forEach(Elem1);
         var msUTC = Date.parse(obj.datetime); // время сообщения на сервере 
 
-        console.log("msUTC: "+ msUTC+ "data_last: " + last_date() );
+//        console.log("msUTC: "+ msUTC+ "data_last: " + last_date() );
         if(msUTC>last_date()){
-              console.log("Условие выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
-
-              
-              var newli = document.createElement('li');
-       
-
+//              console.log("Условие выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
+           
+              var newli = document.createElement('li');      
               if(obj.user_id != user_you_id()){ // получаем все кроме своих
 
               newli.className = "message_pull_all"; // присваиваем class
@@ -214,7 +165,7 @@ request2.onload = function () { //добавление сообщений соо
               }
 
     }else{
-      console.log("Условие не выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
+//      console.log("Условие не выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
     }
 
       }
@@ -229,28 +180,9 @@ request2.onerror = function() {
 };
 request2.send();
 }
-pull_send_enter.addEventListener("click", add_message);
-setInterval(add_message, 2000);
+//pull_send_enter.addEventListener("click", add_message);
+setInterval(add_message, 6000);
 
-//           ТЕСТ
-
-
-
-
-
-function testuser(){ //как извлечь данные при нажатии?
-  var i = 5;
-  var last = using_pure_js.getElementsByTagName('a').length;
-  var last1 = using_pure_js.getElementsByTagName('a')[i].getAttribute('id');
-  var testli = event.target.innerText;
-  var testli1 = event.target.getAttribute('id');
-
-  alert(testli);
-}
-
-//var myuser = using_pure_js.getElementsByTagName('a').length;
-//alert (myuser);
-using_pure_js.addEventListener("click", testuser);
 
 
 function hello_user(){//записывает имя в приветствие
@@ -311,34 +243,34 @@ your_name_enter.addEventListener("click", send_nik_server);
 
 var date_nowISO = function (){
   var now = new Date();
-    var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
-    return time_ISO;
+  var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
+  return time_ISO;
 }
 
 var date_now = function (){
   var now = new Date();
-    var hours = now.getHours();
-    if (hours < 10){
-      hours = "0" + hours;
-    } else {
-      hours = hours;
-    };
+  var hours = now.getHours();
+  if (hours < 10){
+    hours = "0" + hours;
+  } else {
+    hours = hours;
+  };
 
-    var minutes = now.getMinutes();
-    if (minutes < 10){
-      minutes = "0" + minutes;
-    } else {
-      minutes = minutes;
-    }
+  var minutes = now.getMinutes();
+  if (minutes < 10){
+    minutes = "0" + minutes;
+  } else {
+    minutes = minutes;
+  }
 
-    var seconds = now.getSeconds();
-    if (seconds < 10){
-      seconds = "0" + seconds;
-    } else {
-      seconds = seconds;
-    } 
-    var time_now = hours + ":" + minutes;
-    return time_now;
+  var seconds = now.getSeconds();
+  if (seconds < 10){
+    seconds = "0" + seconds;
+  } else {
+    seconds = seconds;
+  } 
+  var time_now = hours + ":" + minutes;
+  return time_now;
 }
 
 
