@@ -4,8 +4,24 @@
 
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
+
+
+var user_you_id = function user_you_id(){ // записываем id пользоватяля
+var you_id = "2121020149"; //id user по умолчанию
+if(your_id.value){
+var you_id = your_id.value;
+}
+console.log(you_id);
+    return you_id;
+}
+your_id_enter.addEventListener("click", user_you_id);
+your_id_enter.addEventListener("load", user_you_id);
+
+
+
+
 var request = new XMLHttpRequest();
-request.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/user', true);
+request.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
 
 request.onload = function pull_user() { //загрузка пользователей
   if (request.status >= 200 && request.status < 400) {
@@ -29,8 +45,8 @@ request.onload = function pull_user() { //загрузка пользовате�
 
 
 request.onerror = function() {
-  alert("Нет соединения с сервером 'https://main-workspace-juggerr.c9users.io:8081/user'"+ "Стату:" + request.status);
-   console.log("Нет соединения с сервером'https://main-workspace-juggerr.c9users.io:8081/user' "+"Стату:" + request.status);
+  alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/users"+ "Стату:" + request.status);
+   console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/users' "+"Стату:" + request.status);
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
@@ -39,16 +55,25 @@ request.send();
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
 var request1 = new XMLHttpRequest();
-request1.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
+request1.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/messages', true);
 
 request1.onload = function pull_message() {
   if (request1.status >= 200 && request1.status < 400) {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
+    var prevDate = 1;
     JSON.parse(response1).forEach(
       function (obj) {
         var d1 = new Date(obj.datetime); // берем время с сервера в нужном формате
+        var options = {
+            month: 'long',
+            day: 'numeric'
+          };
+
+        var d_month = d1.getMonth();
+        var d_date = d1.getDate();
+
         var d_hours = d1.getHours();
         if (d_hours < 10){
           d_hours ="0" + d_hours; 
@@ -62,9 +87,19 @@ request1.onload = function pull_message() {
            d_min =d_min; 
         }
         var d = d_hours + ":" + d_min;  // дата час : минуты
+        var dm = d1.toLocaleString("en-US", options);  
+        var d_m_d = d_date;
+        if(Math.floor(Date.parse(obj.datetime)/100000000) == Math.floor(Date.parse(new Date())/100000000)){
+          dm = "Today";
+        }
+
+        if(Math.floor(Date.parse(obj.datetime)/100000000) == Math.floor(Date.parse(new Date())/100000000-1)){
+          dm = "Yesterday";
+        }
+
         var user =  obj.user_id;    
         var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
-        
+
         function Elem1(elem) {  // для замены id на имя пользователя
           var user1 = elem.user_id;
           if(user == user1){
@@ -73,13 +108,42 @@ request1.onload = function pull_message() {
         }
         JSON.parse(arr_user).forEach(Elem1);
 
-        var ul = document.getElementById('chat_online_ul');
-        if(obj.user_id == 106440716){ // user_id отправителя  задаем классы для стилей пользователя
+        var ul = document.getElementById('chat_online_ul');        
+
+
+        if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя
     
+        var nxDate = obj.datetime;
+        nxDate = Math.floor(Date.parse(nxDate)/100000000);
+
+
+        prevDate = Math.floor(Date.parse(prevDate)/100000000);
+
+       if (nxDate > prevDate){
+
+        ul.innerHTML +=`<div  class="day_date">-------------------------  ${dm}  -------------------------</div>`;
+        }
+        prevDate = obj.datetime;
+
         ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+        nxDate = obj.datetime;
         chat_online_ul.scrollIntoView(false);
           }else{ // задаем классы для стилей осталных пользователей
+      
+
+        var nxDate = obj.datetime;
+        nxDate = Math.floor(Date.parse(nxDate)/100000000);
+        prevDate = Math.floor(Date.parse(prevDate)/100000000);
+
+       if (nxDate > prevDate){
+
+        ul.innerHTML +=`<div class="day_date">-------------------------  ${dm}  -------------------------</div>`;
+      }
+        prevDate = obj.datetime;
+
         ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+        
+        nxDate = obj.datetime;
         chat_online_ul.scrollIntoView(false);
         }
       }
@@ -92,8 +156,8 @@ request1.onload = function pull_message() {
 };
 
 request1.onerror = function() {
-   alert("Нет соединения с сервером 'https://main-workspace-juggerr.c9users.io:8081/messages' "+ "Стату:" + request.status);
-   console.log("Нет соединения с сервером'https://main-workspace-juggerr.c9users.io:8081/messages' "+"Стату:" + request.status);
+   alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/messages' "+ "Стату:" + request.status);
+   console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/messages' "+"Стату:" + request.status);
  
   // Обработчик ответа в случае неудачного соеденения
 };
@@ -114,7 +178,7 @@ return data_last;
 // добавления сообщений
 function add_message(){
 var request2 = new XMLHttpRequest();
-request2.open('GET', 'https://main-workspace-juggerr.c9users.io:8081/messages', true);
+request2.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/messages', true);
 
 request2.onload = function () { //добавление сообщений сообщений от определенных пользователей
   if (request2.status >= 200 && request2.status < 400) {
@@ -227,7 +291,7 @@ xhr.onreadystatechange = function () {
       console.log(data);
     } 
  };
- xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/user/register", true); 
+ xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/users/register", true); 
  xhr.setRequestHeader('Content-Type', 'application/json');
  xhr.send(JSON.stringify(
  { 
@@ -241,11 +305,11 @@ your_name_enter.addEventListener("click", send_nik_server);
 
 
 
-var date_nowISO = function (){
+/*var date_nowISO = function (){
   var now = new Date();
   var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
   return time_ISO;
-}
+}*/
 
 var date_now = function (){
   var now = new Date();
@@ -275,7 +339,7 @@ var date_now = function (){
 
 
 
-var send_massage = function send_massage(){ 
+var send_massage = function send_massage(){ // отправка сообщений в окно вверх
 
   var text = text1.value; //берем данные из textarea
   var new_li = document.createElement('li');  // создаем li
@@ -329,19 +393,18 @@ var send_massage = function send_massage(){
 input_chat.addEventListener("click", send_massage);
 
 
-var user_you_id = function user_you_id(){ // записываем id пользоватяля
-var you_id = your_id.value;
-console.log(you_id);
-    return you_id;
-}
-your_id_enter.addEventListener("click", user_you_id);
-
-
 function send_massage_server(){
     //передача на сервер
     
-    var text = text1.value; //берем данные из textarea
-//    var user_you_id = 
+    var BodyMess = { // заглушка
+        "datetime": "2017-03-30T15:46:48.382Z",
+        "message": "test-test",
+        "user_id": "2121020149"  //106440716 user_you_id()
+        
+      }
+
+    var text = text1.value; 
+    var now = new Date();
     var xhr = new XMLHttpRequest(); 
     xhr.onreadystatechange = function () { 
        if (this.readyState != 4) return; 
@@ -350,17 +413,15 @@ function send_massage_server(){
           console.log(data);
         } 
      };
-     xhr.open("POST", "https://main-workspace-juggerr.c9users.io:8081/messages", true); 
+     xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/messages", true); 
      xhr.setRequestHeader('Content-Type', 'application/json');
-     xhr.send(JSON.stringify(
-     { 
-        "message": text,
-        "user_id": user_you_id(),  //106440716 user_you_id()
-        "datetime": date_nowISO()
-      }
+     BodyMess.datetime = now.toISOString();// вывод, похожий на '2011-01-26T13:51:50.417Z'
+     BodyMess.message = text1.value;//берем данные из textarea
+     BodyMess.user_id = user_you_id(); //берем user_id
+     xhr.send(JSON.stringify(BodyMess));
 
-      ));
-      add_message();
+//     console.log(BodyMess.datetime);
+//      add_message();
       document.getElementById('text1').value = '';  // очищаем после отправки
      //передача на сервер
 };
