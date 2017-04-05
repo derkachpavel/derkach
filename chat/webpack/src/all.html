@@ -1,25 +1,578 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>chat</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		html, body, img, form,  input, button, textarea, h1, h2, h3, a, p, ul, li  {
+	margin:0;
+	padding:0;
+}
 
+ul, li {
+	list-style-type:none;
+}
+.wrapper{
+	position: absolute;
+	top: 40px;
+	left: 40px;
+	width: 654px;
+	height: 565px;
+	font-size: 15px;
+}
+header {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 654px;
+	height: 108px;
+	background: #457679;
+	box-shadow: 9px 10px 14px -9px #000000;
+}
+
+.time{
+	font-size: 12px;
+	margin-top: 15px;
+	margin-left: 18px;
+	color: white;
+}
+.pers-private {
+	font-size: 15px;
+	margin-top: 15px;
+	margin-left: 18px;
+}
+
+a.pers-info {
+	color: white;
+}
+
+.hello-user{
+	color: white;
+}
+
+.hello-user span{
+	margin-left: 5px;
+}
+
+.logo {
+	position: absolute;
+	top: 3px;
+	right: 10px;
+
+}
+
+.input_name{
+	position: absolute;
+	top: 145px;
+	left: 0;
+	width: 108px;
+	height: 20px;
+	padding-left: 20px;
+	border: solid 1px #cecbcb;
+}
+
+.input_name_enter {
+	position: absolute;
+	top: 145px;
+	left: 132px;
+	width: 40px;
+	height: 22px;
+    background: #457679;
+    box-shadow: 9px 9px 9px -9px #000000;
+    color: white;
+}
+
+.user-chat{
+	position: absolute;
+	top: 175px;
+	left: 0;
+	width: 172px;
+	height: 321px;
+	background: #457679;
+	box-shadow: 9px 10px 14px -9px #000000;
+
+}
+
+.away {  // стиль для неактивного
+	color:orange;
+}
+
+
+p.online-user{
+	font-size: 11px;
+	margin-left: 21px;
+	margin-top:5px;
+	color: white;
+}
+
+div.list-uder{
+	width: 142px;
+	background: #fff;
+}
+
+div.list-uder-wr {
+	position: absolute;
+	top:23px;
+	left:14px;
+	width:144px;
+    height: 284px;
+	overflow: auto;
+} 
+
+.list-uder ul{
+	min-height:283px;
+	min-width: 127px;
+}
+
+.list-uder ul li{
+	margin-left:8px;
+	padding-top:8px;	
+}
+
+
+
+div.chat{
+	position: absolute;
+	top: 119px;
+	right: 0;
+	width: 472px;
+	height: 283px;
+	background: #fff;
+}
+.chat-main a, .chat-with a, .chat-with1 a, ul.format-message a{
+	text-decoration:none;
+	color:black;
+}
+
+
+
+ul.chat-all{
+	overflow:hidden;
+	margin-left: 4px;
+}
+
+ul.chat-all a{
+	display: block;
+	float:left;
+	border-top:solid 1px #cecbcb;
+	border-left:solid 1px #cecbcb;
+	line-height: 25px;
+	text-align: center;
+	padding: 0 10px;
+}
+
+li.active a{
+	background: #457679;
+	color: white;
+}
+
+ul.chat-all a:hover {
+	background: #457679;
+	color: white;
+}
+
+
+ul.chat-all li:hover a.close{
+	background: #457679;
+	color: white;
+}
+
+.chat-with a.close, .chat-with1 a.close {
+	padding: 0 2px;
+	border-left:none;
+}
+
+.chat-with1 a.close{
+	border-right:solid 1px #cecbcb;
+}
+
+ul.chat-all li:hover a.close:hover{
+	background: red;
+	font-weight: bold;
+}
+
+.chat-online-wr{
+	position:relative;
+	width: 470px;
+	height: 264px;
+	background: #fff;
+	border:solid 1px #cecbcb;
+}
+ 
+div.chat-online-all{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 470px;
+	height: 260px;
+	overflow: auto;
+}
+div.chat-online{
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	width: 442px;
+	height: 259px;	
+}
+
+.date_hidden{
+	display: none;
+}
+
+.message_pull{
+	display:inline-block;
+	background:#f2f5f4;
+	border-radius:5px;
+	padding:10px;
+	margin-left:5px;
+	width:250px;
+	text-align:left;
+	margin-top:10px;
+	word-wrap: break-word;
+}
+
+.user_pull{
+	display: inline-block;
+	width: 78px;
+}
+
+.date_pull{
+	display:inline-block;
+	font-weight: 200;
+	font-size:11px;
+	text-decoration:underline;
+	margin-left:5px;
+}
+
+li.chat-message-all{
+	display:block;
+	margin-top:10px;
+	text-align:right;
+	margin-right:10px;
+	
+}
+
+span.chat_message{
+	display:inline-block;
+	background:#dddddd;
+	border-radius:5px;
+	padding:10px;
+	margin-right:5px;
+	width:250px;
+	text-align:left;
+	word-wrap:break-word;
+	
+}
+
+
+span.date{
+	display:inline-block;
+	font-weight: 200;
+	font-size:11px;
+	text-decoration:underline;
+}
+
+.input-message{
+	position: absolute;
+	bottom: 71px;
+	right: 0;
+	width: 472px;
+	height: 75px;
+}
+
+div.text-messege textarea {
+	display: block;
+	overflow: auto;
+	width: 460px;
+	height: 65px;	
+	border:solid 1px #cecbcb;
+	padding-left:10px;
+	padding-top:10px;
+	resize: none;
+}
+
+ul.format-message{
+	overflow:hidden;
+	position:absolute;
+	margin-left:130px;
+	z-index: 1;
+}
+
+ul.format-message li{
+	display: block;
+	float:left; 
+	text-align: center;
+}
+ul.format-message input{
+	display: block;
+	width:20px;
+	border-left:solid 1px #cecbcb;
+	padding: 0px 0px;
+	background: #457679;
+	color: white;
+}
+li.format-fat input{
+	font-weight: bold;
+}
+
+li.format-italics input{
+	font-style:italic;	
+}
+
+li.format-underline input{
+	border-right:solid 1px #cecbcb;
+	text-decoration:underline;
+}
+
+li.format-link input:last-child{
+	border-right:solid 1px #cecbcb;
+	width:40px;
+	margin-left:20px;
+}
+
+
+form.send-message {
+	position:absolute;
+	top:85px;
+	right:0px;
+}
+
+form.send-message input{
+	width: 150px;
+	height: 25px;
+	background: #457679;
+	box-shadow: 9px 9px 9px -9px #000000;
+	color: white;
+}
+div.entered-message {
+	position:absolute;
+	bottom:0px;
+	left:182px;
+	font-size: 13px;
+	font-weight: 200;
+}
+
+
+// модальное окно
+
+.modal_1 {
+    position:absolute;
+	top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+    pointer-events: none;
+    display: none;
+    z-index: 2;
+}
+	
+.modal_1:target {
+    display: block;
+    pointer-events: auto;
+    z-index: 2;
+}
+	
+	
+.modalokno_1 {
+    width: 350px;
+    position: relative;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    z-index: 2;
+}
+
+	
+.close_1 {
+    background: #606061;
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    top: -10px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 1px 1px 3px #000;
+	opacity:.5;
+	z-index: 2;
+}
+.close_1:hover{ 
+    background: #457679; 
+    transition: opacity 1s ease;
+    opacity:1;
+    z-index: 2;
+}
+.modalokno_1 h2{
+	color: #457679;
+}
+
+.input_reg p{
+	margin-top:10px;
+}
+
+.input_reg input{
+	margin-left:5px;
+}
+
+.input_reg input {
+	text-align: center;
+}
+.modalokno_1{
+	text-align:center;
+}
+
+#input_reg{
+	margin-top:15px;
+    width: 150px;
+    height: 25px;
+    background: #457679;
+    box-shadow: 9px 9px 9px -9px #000000;
+    color: white;
+}
+	</style>
+</head>
+<body>
+
+		<input id="your_id" type="text" name="your_name"  placeholder="enter your id" />
+		<input id="your_id_enter" type="button"  value="ok" />
+<!-- 		</br>
+		<input id="pull_send_enter" type="button"  value="получить сообщения" />
+        <input id="pull_last_date" type="button"  value="получить date" />
+        <input id="pull_server_date" type="button"  value="получить date_server" />
+         -->
+
+	<div class="wrapper">
+		<header>
+		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
+			<div class="time">
+				<p class="online-time">You are online for: <span id="online_time">1h 30m</span></p>
+				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
+			</div>
+			<div class="pers-private">
+				<p><a id="open_reg" class="pers-info" href="#modal_1">Edit personal info</a></p>
+				<p class="hello-user">Hello:<span id="enter_user"></span></p>
+			</div>
+			<div class="logo">
+				<img src="images/hobnob.png">
+			</div>
+
+		</header>
+		<input id="your_name" type="text" name="your_name" class="input_name" placeholder="enter your name" />
+		<input id="your_name_enter" type="button" class="input_name_enter" value="ok" />
+		<div class="user-chat">
+			<div class="online-user">
+				<p class="online-user">Online:<span id="online_users">5</span></p>
+			</div>
+			<div class="list-uder-wr">
+				<div class="list-uder">
+					<ul id="using_pure_js">
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="chat">
+			<ul class="chat-all">
+				<li class="chat-main active"><a href="#">Main chat</a></li>
+				<li class="chat-with"><a href="#">Chat with Alison (2)</a><a class="close" href="#">X</a></li>
+				<li class="chat-with1"><a href="#">Chat with John (2)</a><a class="close" href="#">X</a></li>
+
+			</ul>
+			
+			<!-- <div id="online_1" class="chat-online-wr" style="display: none">
+				<div class="chat-online-all">
+					<div class="chat-online" id="chat_online_div_1">
+							
+							<ul id="chat_online_ul_1">
+														
+								<li class="chat-message-all"><span class="date"> Alison Black:</span><span class="chat_message">It's snowy, temperature here is 10 degrees below zero celsius.</span></li>
+								
+								<li class="chat-message-all"><span class="date">John Snow:</span><span class="chat_message">Wuh, itseems winter has come indeed...</span></li>
+							
+														
+							</ul>
+					</div>
+				</div>
+			</div>
+ -->
+			<div id="online_main" class="chat-online-wr" style="display: block">
+				<div class="chat-online-all">
+					<div class="chat-online" id="chat_online_div">
+							
+							<ul id="chat_online_ul">
+
+								<!-- <li class="chat-message-all"><span class="date_hidden">1488537424826</span><span class="chat_message">Hi, how is the weather there?</span><span class="date">asdgf</span></li> -->
+								
+								<!-- <li class="chat-message-all"><span class="date"> Alison Black:</span><span class="chat_message">It's snowy, temperature here is 10 degrees below zero celsius.</span></li>
+								
+								<li class="chat-message-all"><span class="date">John Snow:</span><span class="chat_message">Wuh, itseems winter has come indeed...</span></li> -->
+							
+														
+							</ul>
+					</div>
+				</div>
+			</div>
+		</div>	
+		
+		
+		<div class="input-message">
+			<div class="text-messege">
+				<form name="chat_form">
+					<textarea id="text1" name="text" value=""></textarea>
+				</form>
+			</div>
+					
+  			<ul class="format-message" id="format_red">
+				<li class="format-fat"><input id="select_b" class="format-fat" type="button" value="B" /></li>
+				<li class="format-italics"><input id="select_i" class="format-italics" type="button" value="I" /></li>
+				<li class="format-underline"><input id="select_u" class="format-underline" type="button" value="U" /></li>
+				<li class="format-link"><input id="select_link" class="format-link" type="button" value="Link" /></li>
+			</ul>
+			<form class="send-message">
+				<input id="input_chat" type="button" name="send-message" value="Send message">	
+			</form>		
+		</div>
+
+		<div class="entered-message">
+			<div class="quantity-symbols"><p><span id="symbol" class="quantity">0</span> characters entered</p></div>
+			<div class="quantity-letter"><p><span id="letter" class="quantity">0</span> letters entered</p></div>
+			<div class="quantity-hidden"><p><span id="space" class="quantity">0</span> whitespace characters entered</p></div>
+			<div class="quantity-punctuation"><p><span id="punctuation" class="quantity">0</span> punctuation marks entered</p></div>
+		</div>
+		
+
+
+	</div>
+
+	<div style ="display: none" id="modal_1" class="modal_1">
+		<div class="modalokno_1"> 
+        	<a id="close_1" href="#" title="Закрыть" class="close_1">X</a>
+	        <h2>Registration</h2>
+	        	<form id="reg_form" class="input_reg">
+			        <p>Enter name:<input id="your_name_reg" type="text" name="your_name" placeholder="enter your name" /></p>
+			        
+			        <p>Enter email:<input id="your_email_reg" type="email" name="your_email" placeholder="enter your email" /></p>
+			       
+			        <p>Enter birthday:<input id="your_birthday_reg" type="text" name="your_birthday" placeholder="enter your birthday" /></p>
+			       
+			        <input id="input_reg" type="button" name="send-reg" value="Registration">
+			    </form>    
+		</div>	
+	</div>    
+
+</body>
+<script type="text/javascript">
+	
 
 // var myjs = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
 
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
-
-
-var user_you_id = function user_you_id(){ // записываем id пользоватяля
-var you_id = "2121020149"; //id user по умолчанию
-if(your_id.value){
-var you_id = your_id.value;
-}
-console.log(you_id);
-    return you_id;
-}
-your_id_enter.addEventListener("click", user_you_id);
-your_id_enter.addEventListener("load", user_you_id);
-
-
-
-
 var request = new XMLHttpRequest();
 request.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
 
@@ -45,8 +598,8 @@ request.onload = function pull_user() { //загрузка пользовате�
 
 
 request.onerror = function() {
-  alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/users"+ "Стату:" + request.status);
-   console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/users' "+"Стату:" + request.status);
+  alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/user'"+ "Стату:" + request.status);
+   console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/user' "+"Стату:" + request.status);
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
@@ -62,18 +615,11 @@ request1.onload = function pull_message() {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
-    var prevDate = "March 01";
     JSON.parse(response1).forEach(
       function (obj) {
         var d1 = new Date(obj.datetime); // берем время с сервера в нужном формате
-        var options = {
-            month: 'long',
-            day: 'numeric'
-          };
-
         var d_month = d1.getMonth();
-        var d_date = d1.getDate();
-
+        var d_day = d1.getDate();
         var d_hours = d1.getHours();
         if (d_hours < 10){
           d_hours ="0" + d_hours; 
@@ -87,19 +633,9 @@ request1.onload = function pull_message() {
            d_min =d_min; 
         }
         var d = d_hours + ":" + d_min;  // дата час : минуты
-        var dm = d1.toLocaleString("en-US", options);  
-//        alert(new Date(obj.datetime).toLocaleString("en-US", options)); 
-        var d_m_d = d_date;
-        if(new Date(obj.datetime).toLocaleString("en-US", options) == new Date().toLocaleString("en-US", options)){
-          dm = "Today";
-        }
-        
- //       if(Math.floor(Date.parse(obj.datetime)/100000000) == Math.floor(Date.parse(new Date())/100000000-1)){
- //         dm = "Yesterday";
- //       }
-
         var user =  obj.user_id;    
         var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
+        
 
         function Elem1(elem) {  // для замены id на имя пользователя
           var user1 = elem.user_id;
@@ -109,43 +645,21 @@ request1.onload = function pull_message() {
         }
         JSON.parse(arr_user).forEach(Elem1);
 
-        var ul = document.getElementById('chat_online_ul');        
-
-
+        var ul = document.getElementById('chat_online_ul');
         if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя
-
-        var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
-//        nxDate = Math.floor(Date.parse(nxDate)/100000000);
-
-
-//        prevDate = "March 31";
-
-       if (nxDate != prevDate){
-
-        ul.innerHTML +=`<div  class="day_date">-------------------------  ${dm}  -------------------------</div>`;
-        }
-        prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
-
+    
         ul.innerHTML += `<li class="chat-message-all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="chat_message">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-        nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
-          }else{ // задаем классы для стилей осталных пользователей
-      
-        console.log(dm);      
-        var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
-//        nxDate = Math.floor(Date.parse(nxDate)/100000000);
-//        prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
+          }else{
 
-       if (nxDate != prevDate){
-
-        ul.innerHTML +=`<div class="day_date">-------------------------  ${dm}  -------------------------</div>`;
-      }
-        prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
-
+          	if(d_month == 3 ){
+           // задаем классы для стилей осталных пользователей
+           var newdiv = document.createElement('div');  
+           ul.innerHTML = d_month + ":"+ d_day;
+           chat_online_ul.insertBefore(newdiv, chat_online_ul.firstChild );
         ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-        console.log(dm);
-        nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
+        	}
         }
       }
   
@@ -246,7 +760,7 @@ request2.onerror = function() {
 request2.send();
 }
 //pull_send_enter.addEventListener("click", add_message);
-setInterval(add_message, 6000);
+setInterval(add_message, 2000);
 
 
 
@@ -281,7 +795,7 @@ input_reg.addEventListener("click", register_user);
 
 
 
-function send_nik_server(){
+function send_nik_server(){ // регистрация на сервере
 //передача на сервер user
 var xhr = new XMLHttpRequest(); 
 var nik = your_name.value;
@@ -310,7 +824,9 @@ your_name_enter.addEventListener("click", send_nik_server);
   var now = new Date();
   var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
   return time_ISO;
-}*/
+}
+
+alert(date_nowISO());*/
 
 var date_now = function (){
   var now = new Date();
@@ -340,7 +856,7 @@ var date_now = function (){
 
 
 
-var send_massage = function send_massage(){ // отправка сообщений в окно вверх
+var send_massage = function send_massage(){ 
 
   var text = text1.value; //берем данные из textarea
   var new_li = document.createElement('li');  // создаем li
@@ -394,18 +910,20 @@ var send_massage = function send_massage(){ // отправка сообщени
 input_chat.addEventListener("click", send_massage);
 
 
+var user_you_id = function user_you_id(){ // записываем id пользоватяля
+var you_id = your_id.value;
+console.log(you_id);
+    return you_id;
+}
+your_id_enter.addEventListener("click", user_you_id);
+
+
 function send_massage_server(){
     //передача на сервер
-    
-    var BodyMess = { // заглушка
-        "datetime": "2017-03-30T15:46:48.382Z",
-        "message": "test-test",
-        "user_id": "2121020149"  //106440716 user_you_id()
-        
-      }
-
-    var text = text1.value; 
     var now = new Date();
+    var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
+    var text = text1.value; //берем данные из textarea
+//    var user_you_id = 
     var xhr = new XMLHttpRequest(); 
     xhr.onreadystatechange = function () { 
        if (this.readyState != 4) return; 
@@ -416,13 +934,15 @@ function send_massage_server(){
      };
      xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/messages", true); 
      xhr.setRequestHeader('Content-Type', 'application/json');
-     BodyMess.datetime = now.toISOString();// вывод, похожий на '2011-01-26T13:51:50.417Z'
-     BodyMess.message = text1.value;//берем данные из textarea
-     BodyMess.user_id = user_you_id(); //берем user_id
-     xhr.send(JSON.stringify(BodyMess));
+     xhr.send(JSON.stringify(
+     { 
+        "message": text,  
+        "user_id": user_you_id(),  //106440716 user_you_id()
+        "datetime": time_ISO
 
-//     console.log(BodyMess.datetime);
-//      add_message();
+      }
+
+      ));
       document.getElementById('text1').value = '';  // очищаем после отправки
      //передача на сервер
 };
@@ -571,3 +1091,5 @@ select_i.addEventListener("click", getSelectionText1);
 select_b.addEventListener("click", getSelectionText1);
 select_u.addEventListener("click", getSelectionText1);
 select_link.addEventListener("click", getSelectionText1);
+</script>
+</html>
