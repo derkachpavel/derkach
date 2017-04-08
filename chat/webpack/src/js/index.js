@@ -6,16 +6,47 @@
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
 
 
+
+alert("Для участия в обсуждении необходимо зарегистрироваться!!!")
+// Задаем тему
+/*var tema_new = prompt("Ведите тему для обсуждения", "")
+tema.innerHTML = tema_new;*/
+
+
+/*var isAdmin = confirm("Хотите зарегистрироваться?");
+
+if(isAdmin == true){
+    
+  var user_new = prompt("Ведите имя для регистриции", "")
+  enter_user.innerHTML = user_new;
+
+}else{
+  var user_new = prompt("Ведите имя для входа", "")
+  enter_user.innerHTML = user_new;
+
+}*/
+
+
+
 var user_you_id = function user_you_id(){ // записываем id пользоватяля
-var you_id = "2121020149"; //id user по умолчанию
-if(your_id.value){
-var you_id = your_id.value;
+var new_id = "2121020149"; //id user по умолчанию
+var new_id = your_id.innerHTML;
+var user_new =  enter_user.innerHTML;//берем имя  Hello  
+var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
+
+function replaceName(item) {  // для замены имя на id пользователя
+  var user_name = item.username;
+  if(user_new == user_name){
+  new_id =  item.user_id; // задаем id
+  your_id.innerHTML = new_id;
+  console.log("new_id" +new_id+"item.username" +item.username);
+  }
 }
-console.log(you_id);
-    return you_id;
+JSON.parse(arr_user).forEach(replaceName);
+    return new_id;
 }
-your_id_enter.addEventListener("click", user_you_id);
-your_id_enter.addEventListener("load", user_you_id);
+input_enter.addEventListener("click", user_you_id);
+
 
 
 
@@ -50,6 +81,7 @@ request.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
+
 
 
 
@@ -104,7 +136,7 @@ request1.onload = function pull_message() {
         function Elem1(elem) {  // для замены id на имя пользователя
           var user1 = elem.user_id;
           if(user == user1){
-          user =  elem.username; // user_name_repl глобальная переменая
+          user =  elem.username; // user переменая
           }
         }
         JSON.parse(arr_user).forEach(Elem1);
@@ -131,7 +163,7 @@ request1.onload = function pull_message() {
         chat_online_ul.scrollIntoView(false);
           }else{ // задаем классы для стилей осталных пользователей
       
-        console.log(dm);      
+//        console.log(dm);      
         var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
 //        nxDate = Math.floor(Date.parse(nxDate)/100000000);
 //        prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
@@ -143,7 +175,7 @@ request1.onload = function pull_message() {
         prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
 
         ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-        console.log(dm);
+//        console.log(dm);
         nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
         }
@@ -169,8 +201,10 @@ request1.send();
 
 
 var last_date = function last_date(){ //получение даты из формы 
-var last = chat_online_ul.getElementsByClassName('date_hidden').length;
-var data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
+var last = "1";
+last = chat_online_ul.getElementsByClassName('date_hidden').length;
+var data_last = "0";
+data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
 //console.log (data_last);
 return data_last;
 }
@@ -246,21 +280,27 @@ request2.onerror = function() {
 request2.send();
 }
 //pull_send_enter.addEventListener("click", add_message);
-setInterval(add_message, 6000);
+setInterval(add_message, 3000);
 
 
-
-function hello_user(){//записывает имя в приветствие
-enter_user.innerHTML = your_name.value;
-}
-your_name_enter.addEventListener("click", hello_user);
 
 
 function register_open(){// открытие модального окна
 modal_1.style.display = "block";
 }
 open_reg.addEventListener("click", register_open);  // открыть при редактировании
+//setTimeout(register_open,1000);
 
+
+function enter_open(){// открытие модального окна
+modal_enter.style.display = "block";
+}
+open_enter.addEventListener("click", enter_open);  // открыть при редактировании
+
+function enter_close(){ // закрыть модальное окно крестиком
+modal_enter.style.display = "none";
+}
+close_2.addEventListener("click", enter_close);
 
 function register_close(){ // закрыть модальное окно крестиком
 modal_1.style.display = "none";
@@ -268,12 +308,24 @@ modal_1.style.display = "none";
 close_1.addEventListener("click", register_close);
 
 
+function entry_user(){ // регистрация в модальном окне
+if(your_name_enter.value !=""){
+  enter_user.innerHTML = your_name_enter.value;
+  enter_close();
+  }else{
+    alert("Заполните поле!");
+    }
+
+}
+input_enter.addEventListener("click", entry_user);
+
+
 function register_user(){ // регистрация в модальном окне
-if(your_name_reg.value && your_email_reg.value && your_birthday_reg.value){
+if(your_name_reg.value !=""){
   enter_user.innerHTML = your_name_reg.value;
   register_close();
   }else{
-    alert("Заполните Все поля!");
+    alert("Заполните поле!");
     }
 
 }
@@ -284,7 +336,7 @@ input_reg.addEventListener("click", register_user);
 function send_nik_server(){
 //передача на сервер user
 var xhr = new XMLHttpRequest(); 
-var nik = your_name.value;
+var nik = your_name_reg.value;
 xhr.onreadystatechange = function () { 
    if (this.readyState != 4) return; 
    if (this.status == 200 || this.status == 201) {
@@ -301,16 +353,9 @@ xhr.onreadystatechange = function () {
   ));
  //передача на сервер 
 }
-your_name_enter.addEventListener("click", send_nik_server);
+input_reg.addEventListener("click", send_nik_server);
 
 
-
-
-/*var date_nowISO = function (){
-  var now = new Date();
-  var time_ISO = now.toISOString() ; // вывод, похожий на '2011-01-26T13:51:50.417Z'
-  return time_ISO;
-}*/
 
 var date_now = function (){
   var now = new Date();
@@ -400,7 +445,7 @@ function send_massage_server(){
     var BodyMess = { // заглушка
         "datetime": "2017-03-30T15:46:48.382Z",
         "message": "test-test",
-        "user_id": "2121020149"  //106440716 user_you_id()
+        "user_id": "2121020149"  // user_you_id()
         
       }
 

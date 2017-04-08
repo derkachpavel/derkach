@@ -5,34 +5,39 @@
 	<meta charset="utf-8">
 </head>
 <body>
+<div style="display: block;">
+<!-- 		<input id="your_id" type="text" name="your_name"  placeholder="enter your id" /> -->
+<!-- 		<input id="your_id_enter" type="button"  value="ok" /> -->
 
-		<input id="your_id" type="text" name="your_name"  placeholder="enter your id" />
-		<input id="your_id_enter" type="button"  value="ok" />
-<!-- 		</br>
-		<input id="pull_send_enter" type="button"  value="получить сообщения" />
-        <input id="pull_last_date" type="button"  value="получить date" />
-        <input id="pull_server_date" type="button"  value="получить date_server" />
-         -->
+</div> 
 
 	<div class="wrapper">
 		<header>
 		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
+		<div id="your_id" style="display: none;">11</div>
 			<div class="time">
 				<p class="online-time">You are online for: <span id="online_time">1h 30m</span></p>
 				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
 			</div>
 			<div class="pers-private">
-				<p><a id="open_reg" class="pers-info" href="#modal_1">Edit personal info</a></p>
-				<p class="hello-user">Hello:<span id="enter_user"></span></p>
+				<input class="open" id="modal_enter_1" type="checkbox" hidden>
+				<input class="open" id="modal_reg_1" type="checkbox" hidden>
+
+				<label id="open_reg" class="pers-info" for="modal_reg_1">Registration</label></br>
+<!-- 				<p><a id="open_reg" class="pers-info" href="#modal_1">Registration</a></p> -->
+				<label id="open_enter" class="pers-info" for="modal_enter_1">Entry</label>
+
+<!-- 				<p><a id="open_enter" class="pers-info" href="#modal_enter">Entry</a></p> -->
+				<p class="hello1-user">Hello:<span id="enter_user"></span></p>
 			</div>
 			<div class="logo">
 				<img src="images/hobnob.png">
 			</div>
 
 		</header>
-		<input id="your_name" type="text" name="your_name" class="input_name" placeholder="enter your name" />
+<!-- 		<input id="your_name" type="text" name="your_name" class="input_name" placeholder="enter your name" />
 		<input id="your_name_enter" type="button" class="input_name_enter" value="ok" />
-		<div class="user-chat">
+ -->		<div class="user-chat">
 			<div class="online-user">
 				<p class="online-user">Online:<span id="online_users">5</span></p>
 			</div>
@@ -47,38 +52,18 @@
 		<div class="chat">
 			<ul class="chat-all">
 				<li class="chat-main active"><a href="#">Main chat</a></li>
-				<li class="chat-with"><a href="#">Chat with Alison (2)</a><a class="close" href="#">X</a></li>
+				<li id="tema">Сегодня обсуждаем ямы на дорогах в городе Чернигове</li>
+<!-- 				<li class="chat-with"><a href="#">Chat with Alison (2)</a><a class="close" href="#">X</a></li>
 				<li class="chat-with1"><a href="#">Chat with John (2)</a><a class="close" href="#">X</a></li>
-
+ -->
 			</ul>
 			
-			<!-- <div id="online_1" class="chat-online-wr" style="display: none">
-				<div class="chat-online-all">
-					<div class="chat-online" id="chat_online_div_1">
-							
-							<ul id="chat_online_ul_1">
-														
-								<li class="chat-message-all"><span class="date"> Alison Black:</span><span class="chat_message">It's snowy, temperature here is 10 degrees below zero celsius.</span></li>
-								
-								<li class="chat-message-all"><span class="date">John Snow:</span><span class="chat_message">Wuh, itseems winter has come indeed...</span></li>
-							
-														
-							</ul>
-					</div>
-				</div>
-			</div>
- -->
-			<div id="online_main" class="chat-online-wr" style="display: block">
+
+			<div id="online_main" class="chat-online-wr" >
 				<div class="chat-online-all">
 					<div class="chat-online" id="chat_online_div">
 							
 							<ul id="chat_online_ul">
-
-								<!-- <li class="chat-message-all"><span class="date_hidden">1488537424826</span><span class="chat_message">Hi, how is the weather there?</span><span class="date">asdgf</span></li> -->
-								
-								<!-- <li class="chat-message-all"><span class="date"> Alison Black:</span><span class="chat_message">It's snowy, temperature here is 10 degrees below zero celsius.</span></li>
-								
-								<li class="chat-message-all"><span class="date">John Snow:</span><span class="chat_message">Wuh, itseems winter has come indeed...</span></li> -->
 							
 														
 							</ul>
@@ -117,21 +102,30 @@
 
 	</div>
 
-	<div style ="display: none" id="modal_1" class="modal_1">
+	<div style ="display: none;" id="modal_1" class="modal_1">
 		<div class="modalokno_1"> 
         	<a id="close_1" href="#" title="Закрыть" class="close_1">X</a>
 	        <h2>Registration</h2>
 	        	<form id="reg_form" class="input_reg">
-			        <p>Enter name:<input id="your_name_reg" type="text" name="your_name" placeholder="enter your name" /></p>
+			        <p>Enter name:<input id="your_name_reg" type="text" /></p>
 			        
-			        <p>Enter email:<input id="your_email_reg" type="email" name="your_email" placeholder="enter your email" /></p>
-			       
-			        <p>Enter birthday:<input id="your_birthday_reg" type="text" name="your_birthday" placeholder="enter your birthday" /></p>
-			       
 			        <input id="input_reg" type="button" name="send-reg" value="Registration">
 			    </form>    
 		</div>	
 	</div>    
+
+	<div style ="display: none;" id="modal_enter" class="modal_1">
+		<div class="modalokno_1"> 
+        	<a id="close_2" href="#" title="Закрыть" class="close_1">X</a>
+	        <h2>Entry</h2>
+	        	<form id="enter_form" class="input_reg">
+			        <p>Enter name:<input id="your_name_enter" type="text" /></p>
+			        
+			        <input id="input_enter" type="button" name="send-reg" value="Entry">
+			    </form>    
+		</div>	
+	</div>    
+
 
 </body>
 </html>

@@ -1,3 +1,55 @@
+// обнуление стилей
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+main, menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, main, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+/* Don't kill focus outline for keyboard users: http://24ways.org/2009/dont-lose-your-focus */
+a:hover, a:active {
+    outline: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+// обнуление стилей
+
 html, body, img, form,  input, button, textarea, h1, h2, h3, a, p, ul, li  {
 	margin:0;
 	padding:0;
@@ -26,17 +78,18 @@ header {
 
 .time{
 	font-size: 12px;
-	margin-top: 15px;
+	margin-top: 12px;
 	margin-left: 18px;
 	color: white;
 }
 .pers-private {
 	font-size: 15px;
-	margin-top: 15px;
+	margin-top: 6px;
 	margin-left: 18px;
+	color: white;
 }
 
-a.pers-info {
+.pers-info {
 	color: white;
 }
 
@@ -78,7 +131,7 @@ a.pers-info {
 
 .user-chat{
 	position: absolute;
-	top: 175px;
+	top: 145px;
 	left: 0;
 	width: 172px;
 	height: 321px;
@@ -138,7 +191,10 @@ div.chat{
 	color:black;
 }
 
-
+#tema{
+	padding-top:5px;
+	padding-left:88px;
+}
 
 ul.chat-all{
 	overflow:hidden;
@@ -366,7 +422,7 @@ div.entered-message {
     bottom: 0;
     left: 0;
     background: rgba(0,0,0,0.8);
-    pointer-events: none;
+//    pointer-events: none;
     display: none;
     z-index: 2;
 }
@@ -379,11 +435,12 @@ div.entered-message {
 	
 	
 .modalokno_1 {
-    width: 350px;
+    width: 260px;
     position: relative;
     margin: 5% auto;
     padding: 20px;
     border-radius: 10px;
+    border:solid 1px #457679;
     background: #fff;
     z-index: 2;
 }
@@ -419,18 +476,20 @@ div.entered-message {
 	margin-top:10px;
 }
 
-.input_reg input{
+#input_reg{
+	margin-left:88px;
+}
+
+#input_enter{
+	margin-left:88px;
+}
+
+.modalokno_1 p input{
+	width:159px;
 	margin-left:5px;
 }
 
-.input_reg input {
-	text-align: center;
-}
-.modalokno_1{
-	text-align:center;
-}
-
-#input_reg{
+#input_reg, #input_enter{
 	margin-top:15px;
     width: 150px;
     height: 25px;
@@ -438,3 +497,4 @@ div.entered-message {
     box-shadow: 9px 9px 9px -9px #000000;
     color: white;
 }
+
