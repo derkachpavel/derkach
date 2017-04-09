@@ -84,17 +84,28 @@ header {
 }
 .pers-private {
 	font-size: 15px;
-	margin-top: 6px;
+	margin-top: 13px;
 	margin-left: 18px;
 	color: white;
 }
 
+.pers-private input{
+	width: 120px;
+	height: 25px;
+	background: #c1c1c1;
+	color: #551a8b;
+}
+
+.pers-private input:hover{
+	background: #ff3030;
+	color: #551a8b;
+}
 .pers-info {
 	color: white;
 }
 
 .hello-user{
-	color: white;
+	margin-top:5px;
 }
 
 .hello-user span{
@@ -422,20 +433,13 @@ div.entered-message {
     bottom: 0;
     left: 0;
     background: rgba(0,0,0,0.8);
-//    pointer-events: none;
     display: none;
-    z-index: 2;
-}
-	
-.modal_1:target {
-    display: block;
-    pointer-events: auto;
     z-index: 2;
 }
 	
 	
 .modalokno_1 {
-    width: 260px;
+    width: 500px;
     position: relative;
     margin: 5% auto;
     padding: 20px;
@@ -445,56 +449,62 @@ div.entered-message {
     z-index: 2;
 }
 
-	
-.close_1 {
-    background: #606061;
-    color: #FFFFFF;
-    line-height: 25px;
-    position: absolute;
-    right: -12px;
-    text-align: center;
-    top: -10px;
-    width: 24px;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 12px;
-    box-shadow: 1px 1px 3px #000;
-	opacity:.5;
-	z-index: 2;
-}
-.close_1:hover{ 
-    background: #457679; 
-    transition: opacity 1s ease;
-    opacity:1;
-    z-index: 2;
-}
-.modalokno_1 h2{
+
+.modalokno_1 h3{
+	margin-top:40px;
 	color: #457679;
+	margin-left:128px;
 }
 
 .input_reg p{
 	margin-top:10px;
 }
 
-#input_reg{
-	margin-left:88px;
+.modalokno_1 form{
+	text-align:center;
 }
-
-#input_enter{
-	margin-left:88px;
-}
-
 .modalokno_1 p input{
 	width:159px;
 	margin-left:5px;
 }
 
 #input_reg, #input_enter{
+    display:inline-block;
 	margin-top:15px;
-    width: 150px;
+	margin-left:16px;
+    width: 100px;
     height: 25px;
     background: #457679;
     box-shadow: 9px 9px 9px -9px #000000;
     color: white;
 }
 
+.logo_mod {
+	margin-bottom:28px;
+	width: 500px;
+	height: 60px;
+	background: #457679;
+	box-shadow: 9px 10px 14px -9px #000000;
+}
+.logo_mod div{
+	position:absolute;
+	width:145px;
+	top:31px;
+	left:50px;
+	font-size: 16px;
+	color:white;
+}
+
+.logo_mod img{
+	position:absolute;
+	top:27px;
+	left:320px;
+	height:14%;
+}
+
+.tema_day {
+	font-size: 18px;
+	font-weight: 400;
+	color: #000;
+	padding:10px;
+}

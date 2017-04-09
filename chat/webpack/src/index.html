@@ -11,7 +11,7 @@
 
 </div> 
 
-	<div class="wrapper">
+	<div id="wrapper" class="wrapper" style="display: none;">
 		<header>
 		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
 		<div id="your_id" style="display: none;">11</div>
@@ -20,24 +20,15 @@
 				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
 			</div>
 			<div class="pers-private">
-				<input class="open" id="modal_enter_1" type="checkbox" hidden>
-				<input class="open" id="modal_reg_1" type="checkbox" hidden>
-
-				<label id="open_reg" class="pers-info" for="modal_reg_1">Registration</label></br>
-<!-- 				<p><a id="open_reg" class="pers-info" href="#modal_1">Registration</a></p> -->
-				<label id="open_enter" class="pers-info" for="modal_enter_1">Entry</label>
-
-<!-- 				<p><a id="open_enter" class="pers-info" href="#modal_enter">Entry</a></p> -->
-				<p class="hello1-user">Hello:<span id="enter_user"></span></p>
+				<input id="exit_chat" class="pers-info" type="button" value="Exit"/>
+				<p class="hello-user">Hello:<span id="enter_user"></span></p>
 			</div>
 			<div class="logo">
 				<img src="images/hobnob.png">
 			</div>
 
 		</header>
-<!-- 		<input id="your_name" type="text" name="your_name" class="input_name" placeholder="enter your name" />
-		<input id="your_name_enter" type="button" class="input_name_enter" value="ok" />
- -->		<div class="user-chat">
+		<div class="user-chat">
 			<div class="online-user">
 				<p class="online-user">Online:<span id="online_users">5</span></p>
 			</div>
@@ -53,9 +44,7 @@
 			<ul class="chat-all">
 				<li class="chat-main active"><a href="#">Main chat</a></li>
 				<li id="tema">Сегодня обсуждаем ямы на дорогах в городе Чернигове</li>
-<!-- 				<li class="chat-with"><a href="#">Chat with Alison (2)</a><a class="close" href="#">X</a></li>
-				<li class="chat-with1"><a href="#">Chat with John (2)</a><a class="close" href="#">X</a></li>
- -->
+
 			</ul>
 			
 
@@ -102,30 +91,25 @@
 
 	</div>
 
-	<div style ="display: none;" id="modal_1" class="modal_1">
+	<div style ="display: block;" id="modal_1" class="modal_1">
+
 		<div class="modalokno_1"> 
-        	<a id="close_1" href="#" title="Закрыть" class="close_1">X</a>
-	        <h2>Registration</h2>
+			<div class="logo_mod">
+				<div>Обсуждаем вместе интересные темы</div>
+				<img src="images/hobnob.png">
+			</div>
+<!--        	<div id="close_1" title="Закрыть" class="close_1">X</div> -->
+        	<p class="tema_day">Добрый день ! Для участия в обсуждении зарегистрируйтесь или войдите. </p>
+        	<p class="tema_day">Тема дня: Сегодня обсуждаем ямы на дорогах в городе Чернигове </p>
+	        <h3>Registration/Entry</h3>
 	        	<form id="reg_form" class="input_reg">
-			        <p>Enter name:<input id="your_name_reg" type="text" /></p>
+			        <p>Enter name:<input id="your_name_reg" type="text" required /></p>
 			        
 			        <input id="input_reg" type="button" name="send-reg" value="Registration">
-			    </form>    
-		</div>	
-	</div>    
-
-	<div style ="display: none;" id="modal_enter" class="modal_1">
-		<div class="modalokno_1"> 
-        	<a id="close_2" href="#" title="Закрыть" class="close_1">X</a>
-	        <h2>Entry</h2>
-	        	<form id="enter_form" class="input_reg">
-			        <p>Enter name:<input id="your_name_enter" type="text" /></p>
-			        
 			        <input id="input_enter" type="button" name="send-reg" value="Entry">
 			    </form>    
 		</div>	
 	</div>    
-
 
 </body>
 </html>

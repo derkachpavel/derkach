@@ -5,29 +5,6 @@
 
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
 
-
-
-alert("Для участия в обсуждении необходимо зарегистрироваться!!!")
-// Задаем тему
-/*var tema_new = prompt("Ведите тему для обсуждения", "")
-tema.innerHTML = tema_new;*/
-
-
-/*var isAdmin = confirm("Хотите зарегистрироваться?");
-
-if(isAdmin == true){
-    
-  var user_new = prompt("Ведите имя для регистриции", "")
-  enter_user.innerHTML = user_new;
-
-}else{
-  var user_new = prompt("Ведите имя для входа", "")
-  enter_user.innerHTML = user_new;
-
-}*/
-
-
-
 var user_you_id = function user_you_id(){ // записываем id пользоватяля
 var new_id = "2121020149"; //id user по умолчанию
 var new_id = your_id.innerHTML;
@@ -45,7 +22,7 @@ function replaceName(item) {  // для замены имя на id пользо
 JSON.parse(arr_user).forEach(replaceName);
     return new_id;
 }
-input_enter.addEventListener("click", user_you_id);
+//input_enter.addEventListener("click", user_you_id);
 
 
 
@@ -251,7 +228,7 @@ request2.onload = function () { //добавление сообщений соо
         var msUTC = Date.parse(obj.datetime); // время сообщения на сервере 
 
 //        console.log("msUTC: "+ msUTC+ "data_last: " + last_date() );
-        if(msUTC>last_date()){
+        if(msUTC>last_date){
 //              console.log("Условие выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
            
               var newli = document.createElement('li');      
@@ -285,33 +262,34 @@ setInterval(add_message, 3000);
 
 
 
-function register_open(){// открытие модального окна
-modal_1.style.display = "block";
-}
-open_reg.addEventListener("click", register_open);  // открыть при редактировании
-//setTimeout(register_open,1000);
+your_name_reg.addEventListener('keydown', function(event) {
+    event = event || window.event;   
+    if(event.keyCode != 13) { return; }
+    if (event.keyCode == 13) {   // если метод существует
+        event.preventDefault(); // то вызвать его   
+     }   
+ });
 
 
-function enter_open(){// открытие модального окна
-modal_enter.style.display = "block";
-}
-open_enter.addEventListener("click", enter_open);  // открыть при редактировании
-
-function enter_close(){ // закрыть модальное окно крестиком
-modal_enter.style.display = "none";
-}
-close_2.addEventListener("click", enter_close);
 
 function register_close(){ // закрыть модальное окно крестиком
 modal_1.style.display = "none";
 }
-close_1.addEventListener("click", register_close);
+
+
+function exit(){
+   wrapper.style.display = "none";
+   modal_1.style.display = "block";
+}
+exit_chat.addEventListener("click", exit);
 
 
 function entry_user(){ // регистрация в модальном окне
-if(your_name_enter.value !=""){
-  enter_user.innerHTML = your_name_enter.value;
-  enter_close();
+if(your_name_reg.value !=""){
+  enter_user.innerHTML = your_name_reg.value;
+  user_you_id();
+  register_close();
+  wrapper.style.display = "block";
   }else{
     alert("Заполните поле!");
     }
@@ -323,7 +301,10 @@ input_enter.addEventListener("click", entry_user);
 function register_user(){ // регистрация в модальном окне
 if(your_name_reg.value !=""){
   enter_user.innerHTML = your_name_reg.value;
+  send_nik_server();
   register_close();
+  alert("Спасибо за регистрацию. Выполните вход")
+  location.reload(); //перезагрузка страницы
   }else{
     alert("Заполните поле!");
     }
@@ -353,7 +334,7 @@ xhr.onreadystatechange = function () {
   ));
  //передача на сервер 
 }
-input_reg.addEventListener("click", send_nik_server);
+
 
 
 
@@ -466,8 +447,6 @@ function send_massage_server(){
      BodyMess.user_id = user_you_id(); //берем user_id
      xhr.send(JSON.stringify(BodyMess));
 
-//     console.log(BodyMess.datetime);
-//      add_message();
       document.getElementById('text1').value = '';  // очищаем после отправки
      //передача на сервер
 };
