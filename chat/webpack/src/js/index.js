@@ -286,10 +286,27 @@ exit_chat.addEventListener("click", exit);
 
 function entry_user(){ // регистрация в модальном окне
 if(your_name_reg.value !=""){
+  var user_enter = your_name_reg.value;
   enter_user.innerHTML = your_name_reg.value;
-  user_you_id();
+  var arr_user = user_send.innerHTML;
+
+  function checkName(item) {  // для проверки имени пользователя
+  var user_name = item.username;
+  if(user_enter == user_name){
+  enter_user.innerHTML = your_name_reg.value;
   register_close();
   wrapper.style.display = "block";
+  }else{
+    console.log("test11");
+
+  }
+//  console.log("test11");
+}
+JSON.parse(arr_user).some(checkName);
+
+
+  user_you_id();
+
   }else{
     alert("Заполните поле!");
     }
