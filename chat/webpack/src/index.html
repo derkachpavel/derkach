@@ -6,8 +6,7 @@
 </head>
 <body>
 <div style="display: block;">
-<!-- 		<input id="your_id" type="text" name="your_name"  placeholder="enter your id" /> -->
-<!-- 		<input id="your_id_enter" type="button"  value="ok" /> -->
+
 
 </div> 
 
@@ -100,11 +99,11 @@
 			</div>
 <!--        	<div id="close_1" title="Закрыть" class="close_1">X</div> -->
         	<p class="tema_day">Добрый день ! Для участия в обсуждении зарегистрируйтесь или войдите. </p>
-        	<p class="tema_day">Тема дня: Сегодня обсуждаем ямы на дорогах в городе Чернигове </p>
+        	<p id="tema_day" class="tema_day">Тема дня: Сегодня обсуждаем ямы на дорогах в городе Чернигове </p>
 	        <h3>Registration/Entry</h3>
 	        	<form id="reg_form" class="input_reg">
 			        <p>Enter name:<input id="your_name_reg" type="text" required /></p>
-			        
+			        <div id="err"class="err"></div>
 			        <input id="input_reg" type="button" name="send-reg" value="Registration">
 			        <input id="input_enter" type="button" name="send-reg" value="Entry">
 			    </form>    

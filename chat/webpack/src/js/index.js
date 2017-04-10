@@ -7,7 +7,7 @@
 
 var user_you_id = function user_you_id(){ // записываем id пользоватяля
 var new_id = "2121020149"; //id user по умолчанию
-var new_id = your_id.innerHTML;
+var new_id = your_id.innerHTML; //записываем id
 var user_new =  enter_user.innerHTML;//берем имя  Hello  
 var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
 
@@ -16,15 +16,33 @@ function replaceName(item) {  // для замены имя на id пользо
   if(user_new == user_name){
   new_id =  item.user_id; // задаем id
   your_id.innerHTML = new_id;
-  console.log("new_id" +new_id+"item.username" +item.username);
+  console.log("new_id " +new_id+" item.username " +item.username);
   }
 }
 JSON.parse(arr_user).forEach(replaceName);
     return new_id;
 }
-//input_enter.addEventListener("click", user_you_id);
 
 
+// !! Получение темы
+var requestTopic = new XMLHttpRequest();
+ requestTopic.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/discussionTopic', true); 
+ requestTopic.onload = function() {
+   if (requestTopic.status >= 200 && request.status < 400) {
+     // Обработчик успещного ответа
+     var responseT = requestTopic.responseText;
+     let discussionTopic = JSON.parse(responseT).discussionTopic;     
+//     console.log( JSON.parse(responseT).discussionTopic);
+     tema_day.innerHTML = "<span>Тема дня: </span>" + discussionTopic  ;
+     tema.innerHTML =  discussionTopic  ;
+   } else {
+     // Обработчик ответа в случае ошибки
+   }
+ };
+ requestTopic.onerror = function() {
+   // Обработчик ответа в случае неудачного соеденения
+ };
+ requestTopic.send();
 
 
 
@@ -66,8 +84,10 @@ request.send();
 var request1 = new XMLHttpRequest();
 request1.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/messages', true);
 
-request1.onload = function pull_message() {
-  if (request1.status >= 200 && request1.status < 400) {
+request1.onreadystatechange = function pull_message() {
+  if (this.readyState != 4) return;
+  if (this.status == 200 || this.status == 201) {
+//  if (request1.status >= 200 && request1.status < 400) {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
@@ -97,15 +117,12 @@ request1.onload = function pull_message() {
         }
         var d = d_hours + ":" + d_min;  // дата час : минуты
         var dm = d1.toLocaleString("en-US", options);  
-//        alert(new Date(obj.datetime).toLocaleString("en-US", options)); 
+
         var d_m_d = d_date;
         if(new Date(obj.datetime).toLocaleString("en-US", options) == new Date().toLocaleString("en-US", options)){
           dm = "Today";
         }
         
- //       if(Math.floor(Date.parse(obj.datetime)/100000000) == Math.floor(Date.parse(new Date())/100000000-1)){
- //         dm = "Yesterday";
- //       }
 
         var user =  obj.user_id;    
         var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
@@ -121,14 +138,11 @@ request1.onload = function pull_message() {
         var ul = document.getElementById('chat_online_ul');        
 
 
-        if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя
+        if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя 106440716 user_you_id()
 
         var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
-//        nxDate = Math.floor(Date.parse(nxDate)/100000000);
-
-
-//        prevDate = "March 31";
-
+ 
+       console.log("Получаем сообщения"+user_you_id());
        if (nxDate != prevDate){
 
         ul.innerHTML +=`<div  class="day_date">-------------------------  ${dm}  -------------------------</div>`;
@@ -139,11 +153,8 @@ request1.onload = function pull_message() {
         nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
           }else{ // задаем классы для стилей осталных пользователей
-      
-//        console.log(dm);      
+        
         var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
-//        nxDate = Math.floor(Date.parse(nxDate)/100000000);
-//        prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
 
        if (nxDate != prevDate){
 
@@ -152,7 +163,7 @@ request1.onload = function pull_message() {
         prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
 
         ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
-//        console.log(dm);
+
         nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
         }
@@ -181,11 +192,11 @@ var last_date = function last_date(){ //получение даты из фор�
 var last = "1";
 last = chat_online_ul.getElementsByClassName('date_hidden').length;
 var data_last = "0";
-data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
-//console.log (data_last);
+var data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
+
 return data_last;
 }
-//pull_last_date.addEventListener("click", last_date);
+
 
 // добавления сообщений
 function add_message(){
@@ -227,9 +238,9 @@ request2.onload = function () { //добавление сообщений соо
         JSON.parse(arr_user).forEach(Elem1);
         var msUTC = Date.parse(obj.datetime); // время сообщения на сервере 
 
-//        console.log("msUTC: "+ msUTC+ "data_last: " + last_date() );
-        if(msUTC>last_date){
-//              console.log("Условие выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
+
+        if(msUTC>last_date()){
+
            
               var newli = document.createElement('li');      
               if(obj.user_id != user_you_id()){ // получаем все кроме своих
@@ -241,7 +252,7 @@ request2.onload = function () { //добавление сообщений соо
               }
 
     }else{
-//      console.log("Условие не выполнено: " +"msUTC: "+ msUTC + ">" + "data_last: " + last_date() );
+
     }
 
       }
@@ -257,7 +268,7 @@ request2.onerror = function() {
 request2.send();
 }
 //pull_send_enter.addEventListener("click", add_message);
-setInterval(add_message, 3000);
+setInterval(add_message, 2000);
 
 
 
@@ -286,14 +297,28 @@ exit_chat.addEventListener("click", exit);
 
 function entry_user(){ // регистрация в модальном окне
 if(your_name_reg.value !=""){
+  var user_enter = your_name_reg.value;
   enter_user.innerHTML = your_name_reg.value;
-  user_you_id();
+  var arr_user = user_send.innerHTML;
+
+  function checkName(item) {  // для проверки имени пользователя
+  var user_name = item.username;
+  if(user_enter == user_name){
+  enter_user.innerHTML = your_name_reg.value;
   register_close();
   wrapper.style.display = "block";
   }else{
+   err.innerHTML = "Такой пользователь не зарегистрирован!";
+   setTimeout(function(){err.innerHTML =""},4000);
+
+  }
+//  console.log("test11");
+}
+JSON.parse(arr_user).some(checkName);
+  user_you_id();
+  }else{
     alert("Заполните поле!");
     }
-
 }
 input_enter.addEventListener("click", entry_user);
 
