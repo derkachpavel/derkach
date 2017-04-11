@@ -13,14 +13,14 @@
 	<div id="wrapper" class="wrapper" style="display: none;">
 		<header>
 		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
-		<div id="your_id" style="display: none;">11</div>
+		<div id="your_id" style="display: none;">11</div>  <!-- записываем id пользователя в этот див -->
 			<div class="time">
-				<p class="online-time">You are online for: <span id="online_time">1h 30m</span></p>
-				<p class="local-time">Your local time is: <span id="local_time_now">10:45</span></p>
+				<p class="online-time">Вы на сайте: <span id="online_time">1h 30m</span></p>
+				<p class="local-time">Сейчас: <span id="local_time_now">10:45</span></p>
 			</div>
 			<div class="pers-private">
-				<input id="exit_chat" class="pers-info" type="button" value="Exit"/>
-				<p class="hello-user">Hello:<span id="enter_user"></span></p>
+				<input id="exit_chat" class="pers-info" type="button" value="Выход"/>
+				<p class="hello-user">Привет:<span id="enter_user"></span></p>
 			</div>
 			<div class="logo">
 				<img src="images/hobnob.png">
@@ -29,7 +29,7 @@
 		</header>
 		<div class="user-chat">
 			<div class="online-user">
-				<p class="online-user">Online:<span id="online_users">5</span></p>
+				<p class="online-user">Зарегистрировано:<span id="online_users">5</span></p>
 			</div>
 			<div class="list-uder-wr">
 				<div class="list-uder">
@@ -41,7 +41,7 @@
 
 		<div class="chat">
 			<ul class="chat-all">
-				<li class="chat-main active"><a href="#">Main chat</a></li>
+<!-- 				<li class="chat-main active"><a href="#">Main chat</a></li> -->
 				<li id="tema">Сегодня обсуждаем ямы на дорогах в городе Чернигове</li>
 
 			</ul>
@@ -72,18 +72,19 @@
 				<li class="format-fat"><input id="select_b" class="format-fat" type="button" value="B" /></li>
 				<li class="format-italics"><input id="select_i" class="format-italics" type="button" value="I" /></li>
 				<li class="format-underline"><input id="select_u" class="format-underline" type="button" value="U" /></li>
-				<li class="format-link"><input id="select_link" class="format-link" type="button" value="Link" /></li>
+				<li class="format-link"><input id="select_link" class="format-link" type="button" value="Ссылка" /></li>
+				<li class="select_tema"><input id="select_tema" class="select_tema" type="hidden" value="Изменить тему" /></li>
 			</ul>
 			<form class="send-message">
-				<input id="input_chat" type="button" name="send-message" value="Send message">	
+				<input id="input_chat" type="button" name="send-message" value="Отправить">	
 			</form>		
 		</div>
 
 		<div class="entered-message">
-			<div class="quantity-symbols"><p><span id="symbol" class="quantity">0</span> characters entered</p></div>
-			<div class="quantity-letter"><p><span id="letter" class="quantity">0</span> letters entered</p></div>
-			<div class="quantity-hidden"><p><span id="space" class="quantity">0</span> whitespace characters entered</p></div>
-			<div class="quantity-punctuation"><p><span id="punctuation" class="quantity">0</span> punctuation marks entered</p></div>
+			<div class="quantity-symbols"><p><span id="symbol" class="quantity">0</span> введено символов</p></div>
+			<div class="quantity-letter"><p><span id="letter" class="quantity">0</span> введено букв</p></div>
+			<div class="quantity-hidden"><p><span id="space" class="quantity">0</span> количество пробелов</p></div>
+			<div class="quantity-punctuation"><p><span id="punctuation" class="quantity">0</span> количество знаков препинания</p></div>
 		</div>
 		
 
