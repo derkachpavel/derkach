@@ -27,7 +27,7 @@ JSON.parse(arr_user).forEach(replaceName);
 
 
 
-
+function pull_user_get(){
 var request = new XMLHttpRequest();
 request.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
 
@@ -58,7 +58,8 @@ request.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
-
+}
+pull_user_get();
 
 
 
