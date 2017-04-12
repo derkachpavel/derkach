@@ -1,8 +1,4 @@
 
-
-// var myjs = require('./data/myjs');  // Подключение самостоятельно созданного модуля "users"
-
-
 // Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение пользователей
 
 var user_you_id = function user_you_id(){ // записываем id пользоватяля
@@ -21,20 +17,22 @@ function replaceName(item) {  // для замены имя на id пользо
 }
 JSON.parse(arr_user).forEach(replaceName);
     return new_id;
-}
+};
 
 
 // !! Получение темы
+
 var requestTopic = new XMLHttpRequest();
  requestTopic.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/discussionTopic', true); 
  requestTopic.onload = function() {
    if (requestTopic.status >= 200 && requestTopic.status < 400) {
      // Обработчик успещного ответа
      var responseT = requestTopic.responseText;
-     let discussion = JSON.parse(responseT);
-     let discussionTopic =discussion[discussion.length -1].discussionTopic;   
-     console.dir(discussionTopic);  
-//     console.log( JSON.parse(responseT).discussionTopic);
+
+     var discussion = JSON.parse(responseT);
+     var discussionTopic = "Тема пока не объявлена";
+     var discussionTopic = discussion[discussion.length -1].discussionTopic;
+
      tema_day.innerHTML = "<span>Тема дня: </span>" + discussionTopic  ;
      tema.innerHTML =  discussionTopic  ;
    } else {
@@ -49,13 +47,15 @@ var requestTopic = new XMLHttpRequest();
 
 
 
-var pull_user_get = function pull_user_get(){
+//получение пользователей с сервера
+function pull_user_new() {
+
 var request = new XMLHttpRequest();
 request.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
 
 request.onload = function pull_user() { //загрузка пользователей
   if (request.status >= 200 && request.status < 400) {
-    // Обработчик успещного ответа
+    // Обработчик успешного ответа
     var response = request.responseText;
     console.log(response);
     online_users.innerHTML = response.split('},').length;
@@ -63,7 +63,7 @@ request.onload = function pull_user() { //загрузка пользовате�
     JSON.parse(response).forEach(
       function (obj) {
         var ul = document.getElementById('using_pure_js');
-        ul.innerHTML += `<a id="id${obj.user_id}" href="#"><li class="${obj.status}">${obj.username}</li></a>`;
+        ul.innerHTML += `<li>${obj.username}</li>`;
         using_pure_js.scrollIntoView(false);
       }
     )
@@ -73,7 +73,6 @@ request.onload = function pull_user() { //загрузка пользовате�
   }
 };
 
-
 request.onerror = function() {
   alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/users"+ "Стату:" + request.status);
    console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/users' "+"Стату:" + request.status);
@@ -82,18 +81,21 @@ request.onerror = function() {
 request.send();
 };
 
-pull_user_get();
+pull_user_new();
+//setInterval(pull_user_new, 3000);
 
 
 
-// Выполняется AJAX запрос к внешнему ресурсу c помощью чистого JavaScript получение сообщений
+
+
+// Получение сообщений с сервера
+var last_date = "0";
 var request1 = new XMLHttpRequest();
 request1.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/messages', true);
 
 request1.onreadystatechange = function pull_message() {
   if (this.readyState != 4) return;
   if (this.status == 200 || this.status == 201) {
-//  if (request1.status >= 200 && request1.status < 400) {
     // Обработчик успещного ответа
     var response1 = request1.responseText;
     console.log(response1);
@@ -129,7 +131,7 @@ request1.onreadystatechange = function pull_message() {
           dm = "Today";
         }
         
-
+        last_date = Date.parse(obj.datetime); // время последнего сообщения на сервере 
         var user =  obj.user_id;    
         var arr_user = user_send.innerHTML; //вытаскиваем юзеров из div
 
@@ -141,10 +143,11 @@ request1.onreadystatechange = function pull_message() {
         }
         JSON.parse(arr_user).forEach(Elem1);
 
+
         var ul = document.getElementById('chat_online_ul');        
 
 
-        if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя 106440716 user_you_id()
+/*        if(obj.user_id == user_you_id()){ // user_id отправителя  задаем классы для стилей пользователя 106440716 user_you_id()
 
         var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
  
@@ -159,7 +162,7 @@ request1.onreadystatechange = function pull_message() {
         nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
         chat_online_ul.scrollIntoView(false);
           }else{ // задаем классы для стилей осталных пользователей
-        
+ */       
         var nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
 
        if (nxDate != prevDate){
@@ -168,11 +171,11 @@ request1.onreadystatechange = function pull_message() {
       }
         prevDate = new Date(obj.datetime).toLocaleString("en-US", options);
 
-        ul.innerHTML += `<li class="message_pull_all"><span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
+        ul.innerHTML += `<li class="message_pull_all"><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span></li>`;
 
         nxDate = new Date(obj.datetime).toLocaleString("en-US", options);
-        chat_online_ul.scrollIntoView(false);
-        }
+//        chat_online_ul.scrollIntoView(false);
+//        }
       }
   
     )
@@ -194,14 +197,15 @@ request1.send();
 
 
 
-var last_date = function last_date(){ //получение даты из формы 
+/*var last_date = function last_date(){ //получение даты из формы 
 var last = "1";
 last = chat_online_ul.getElementsByClassName('date_hidden').length;
 var data_last = "0";
 var data_last = chat_online_ul.getElementsByClassName('date_hidden')[last-1].innerHTML;
 
 return data_last;
-}
+};*/
+
 
 
 // добавления сообщений
@@ -238,29 +242,29 @@ request2.onload = function () { //добавление сообщений соо
         function Elem1(elem) {  // для замены id на имя пользователя
           var user1 = elem.user_id;
           if(user == user1){
-          user =  elem.username; // user_name_repl глобальная переменая
+          user =  elem.username; // user переменая
           }
         }
         JSON.parse(arr_user).forEach(Elem1);
         var msUTC = Date.parse(obj.datetime); // время сообщения на сервере 
 
 
-        if(msUTC>last_date()){
+        if(msUTC>last_date){
 
            
               var newli = document.createElement('li');      
-              if(obj.user_id != user_you_id()){ // получаем все кроме своих
+//              if(obj.user_id != user_you_id()){ // получаем все кроме своих
 
               newli.className = "message_pull_all"; // присваиваем class
-              newli.innerHTML = `<span class="date_hidden">${Date.parse(obj.datetime)}</span><span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span>`;
+              newli.innerHTML = `<span class="user_pull">${user}</span><span class="message_pull">${obj.message}</span><span class="date_pull">${d}</span>`;
               chat_online_ul.appendChild(newli);
               chat_online_ul.scrollIntoView(false);
-              }
-
-    }else{
+//              }
+              last_date = msUTC;
+//    }else{
 
     }
-
+      
       }
     )
      
@@ -273,7 +277,6 @@ request2.onerror = function() {
 };
 request2.send();
 }
-//pull_send_enter.addEventListener("click", add_message);
 setInterval(add_message, 2000);
 
 
@@ -295,8 +298,10 @@ modal_1.style.display = "none";
 
 
 function exit(){
-   wrapper.style.display = "none";
-   modal_1.style.display = "block";
+  location.reload(); //перезагрузка страницы
+  wrapper.style.display = "none";
+  modal_1.style.display = "block";
+
 }
 exit_chat.addEventListener("click", exit);
 
@@ -312,13 +317,25 @@ if(your_name_reg.value !=""){
   if(user_enter == user_name){
   enter_user.innerHTML = your_name_reg.value;
   register_close();
+    if (user_enter == 'andreyyaz' || user_enter == 'Derkach Pavel') {
+
+
+/*              var newli = document.createElement('li');    
+              newli.className = "select_tema"; // присваиваем class
+              newli.innerHTML = `<input id="select_tema" class="select_tema" type="button" value="Изменить тему" />`;
+              format_red.appendChild(newli);*/
+
+         document.getElementById('select_tema').type = "button";
+         document.getElementById('delMess').style.display = "block";
+         document.getElementById('delUsers').style.display = "block";
+         document.getElementById('delTema').style.display = "block";
+        }
   wrapper.style.display = "block";
   }else{
    err.innerHTML = "Такой пользователь не зарегистрирован!";
    setTimeout(function(){err.innerHTML =""},4000);
 
   }
-//  console.log("test11");
 }
 JSON.parse(arr_user).some(checkName);
   user_you_id();
@@ -333,11 +350,12 @@ function register_user(){ // регистрация в модальном окн
 if(your_name_reg.value !=""){
   enter_user.innerHTML = your_name_reg.value;
   send_nik_server();
-  pull_user_get();
 //  register_close();
-
   alert("Спасибо за регистрацию. Выполните вход")
-  console.log(pull_user_get());
+  
+  console.log(pull_user_new());
+  pull_user_new();
+
 //  location.reload(); //перезагрузка страницы
   }else{
     alert("Заполните поле!");
@@ -370,6 +388,97 @@ xhr.onreadystatechange = function () {
 }
 
 
+//передача темы на сервер
+function send_tema_server(){
+//передача на сервер tema
+var xhr = new XMLHttpRequest(); 
+var tema = text1.value;
+xhr.onreadystatechange = function () { 
+   if (this.readyState != 4) return; 
+   if (this.status == 200 || this.status == 201) {
+      var data = JSON.parse(this.responseText);
+      console.log(data);
+    } 
+ };
+ xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/discussionTopic/register", true); 
+ xhr.setRequestHeader('Content-Type', 'application/json');
+ xhr.send(JSON.stringify(
+ { 
+    "discussionTopic": tema,
+    "user_id":"2121020149"
+
+   }
+  ));
+ document.getElementById('text1').value = '';  // очищаем после отправки
+ //передача на сервер 
+}
+select_tema.addEventListener("click", send_tema_server);
+
+
+// Очистка сообщений
+function delMess(){
+var xhr = new XMLHttpRequest();xhr.onreadystatechange = function () {
+
+   if (this.readyState != 4) return;
+       if (this.status == 200 || this.status == 201) {
+       var data = JSON.parse(this.responseText);
+       console.log("!!" +this.responseText);
+       
+   } else {
+     console.log('Ошибка');
+   }};
+xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/messages/delete", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+  "user_id":"",
+  "message":"",
+  "datetime":"" ,
+  "chatroom_id":""
+  }
+  ));
+}
+document.getElementById('delMess').addEventListener("click", delMess);
+
+
+// Очистка списка пользователей
+function delUsers(){
+var xhr = new XMLHttpRequest();xhr.onreadystatechange = function () {
+
+   if (this.readyState != 4) return;    if (this.status == 200 || this.status == 201) {
+       var data = JSON.parse(this.responseText);
+       console.log("!!" +this.responseText);
+       
+   } else {
+     console.log('Ошибка');
+   }};xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/users/delete", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+  "user_id":"",
+  "username": "",
+  "status":""
+  }
+  ));
+}
+document.getElementById('delUsers').addEventListener("click", delUsers);
+
+function delTema(){
+var xhr = new XMLHttpRequest();xhr.onreadystatechange = function () {
+
+   if (this.readyState != 4) return;    if (this.status == 200 || this.status == 201) {
+       var data = JSON.parse(this.responseText);
+       console.log("!!" +this.responseText);
+       
+   } else {
+     console.log('Ошибка');
+   }};xhr.open("POST", "https://serveryaz-andreyyaz.c9users.io:8081/discussionTopic/delete", true);
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({
+  "discussionTopic":"",
+  "user_id": ""
+  }
+  ));
+}
+document.getElementById('delTema').addEventListener("click", delTema);
 
 
 var date_now = function (){
@@ -399,7 +508,7 @@ var date_now = function (){
 }
 
 
-
+/*
 var send_massage = function send_massage(){ // отправка сообщений в окно вверх
 
   var text = text1.value; //берем данные из textarea
@@ -449,9 +558,10 @@ var send_massage = function send_massage(){ // отправка сообщени
   }
 
   document.getElementById('text1').value = '';  // очищаем после отправки
-}
+};
 
-input_chat.addEventListener("click", send_massage);
+input_chat.addEventListener("click", send_massage);*/
+
 
 
 function send_massage_server(){
@@ -479,11 +589,27 @@ function send_massage_server(){
      BodyMess.datetime = now.toISOString();// вывод, похожий на '2011-01-26T13:51:50.417Z'
      BodyMess.message = text1.value;//берем данные из textarea
      BodyMess.user_id = user_you_id(); //берем user_id
+
+      var symbol = text1.value.length;  //количество символов
+      var reg_space = /\s/g; //проверка пробелов
+      if (text1.value.match(reg_space)){  //считаем пробелы
+      var reg_space_l = text1.value.match(reg_space).length;
+      } else {
+      var reg_space_l = 0;
+      }
+      var space = reg_space_l; //количество пробелов
+
+      if (symbol >= 1 && symbol != space){
+
+
      xhr.send(JSON.stringify(BodyMess));
+     }
 
       document.getElementById('text1').value = '';  // очищаем после отправки
      //передача на сервер
 };
+input_chat.addEventListener("click", send_massage_server);
+
 
 
 text1.addEventListener("keydown", function TAKeyDown(event) {  
@@ -493,7 +619,7 @@ text1.addEventListener("keydown", function TAKeyDown(event) {
         event.preventDefault(); // то вызвать его    
   
     }
-     send_massage(); // оправляем сообщение
+     send_massage_server(); // оправляем сообщение
      count_reset();  // очищаем подсчет символов
 } );
 
