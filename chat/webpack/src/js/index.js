@@ -28,10 +28,12 @@ JSON.parse(arr_user).forEach(replaceName);
 var requestTopic = new XMLHttpRequest();
  requestTopic.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/discussionTopic', true); 
  requestTopic.onload = function() {
-   if (requestTopic.status >= 200 && request.status < 400) {
+   if (requestTopic.status >= 200 && requestTopic.status < 400) {
      // Обработчик успещного ответа
      var responseT = requestTopic.responseText;
-     let discussionTopic = JSON.parse(responseT).discussionTopic;     
+     let discussion = JSON.parse(responseT);
+     let discussionTopic =discussion[discussion.length -1].discussionTopic;   
+     console.dir(discussionTopic);  
 //     console.log( JSON.parse(responseT).discussionTopic);
      tema_day.innerHTML = "<span>Тема дня: </span>" + discussionTopic  ;
      tema.innerHTML =  discussionTopic  ;
@@ -45,7 +47,9 @@ var requestTopic = new XMLHttpRequest();
  requestTopic.send();
 
 
-function pull_user_get(){
+
+
+var pull_user_get = function pull_user_get(){
 var request = new XMLHttpRequest();
 request.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
 
@@ -76,7 +80,8 @@ request.onerror = function() {
   // Обработчик ответа в случае неудачного соеденения
 };
 request.send();
-}
+};
+
 pull_user_get();
 
 
@@ -328,9 +333,12 @@ function register_user(){ // регистрация в модальном окн
 if(your_name_reg.value !=""){
   enter_user.innerHTML = your_name_reg.value;
   send_nik_server();
-  register_close();
+  pull_user_get();
+//  register_close();
+
   alert("Спасибо за регистрацию. Выполните вход")
-  location.reload(); //перезагрузка страницы
+  console.log(pull_user_get());
+//  location.reload(); //перезагрузка страницы
   }else{
     alert("Заполните поле!");
     }
