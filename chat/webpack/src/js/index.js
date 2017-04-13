@@ -63,7 +63,7 @@ request.onload = function pull_user() { //загрузка пользовате�
     JSON.parse(response).forEach(
       function (obj) {
         var ul = document.getElementById('using_pure_js');
-        ul.innerHTML += `<li>${obj.username}</li>`;
+        ul.innerHTML += `<li class="user">${obj.username}</li>`;
         using_pure_js.scrollIntoView(false);
       }
     )
@@ -82,11 +82,55 @@ request.send();
 };
 
 pull_user_new();
-//setInterval(pull_user_new, 3000);
 
 
+/*
+
+//получение пользователей с сервера
+function add_user_new() {
+
+var request_user = new XMLHttpRequest();
+request_user.open('GET', 'https://serveryaz-andreyyaz.c9users.io:8081/users', true);
+
+request_user.onload = function add_user() { //загрузка пользователей
+  if (request_user.status >= 200 && request_user.status < 400) {
+    // Обработчик успешного ответа
+    var response_user = request_user.responseText;
+//    console.log(response_user);
+    online_users.innerHTML = response_user.split('},').length;
+//    user_send.innerHTML = response_user; // заносим пользователей в div
+    JSON.parse(response_user).forEach(
+      function (obj) {
+          if(user_send.innerHTML==response_user){
+          console.log("некого добавлять");
+          } else{      
+          console.log("Новый юзер!!!! ");
+
+          var ul = document.getElementById('using_pure_js');
+          ul.innerHTML += `<li class="user">${obj.username}</li>`;
+          using_pure_js.scrollIntoView(false);
+          }   
+      }
+    )
+    user_send.innerHTML=response_user;
+  } else {
+  
+    // Обработчик ответа в случае ошибки
+  }
+};
+
+request_user.onerror = function() {
+  alert("Нет соединения с сервером 'https://serveryaz-andreyyaz.c9users.io:8081/users"+ "Стату:" + request_user.status);
+   console.log("Нет соединения с сервером'https://serveryaz-andreyyaz.c9users.io:8081/users' "+"Стату:" + request_user.status);
+  // Обработчик ответа в случае неудачного соеденения
+};
+request_user.send();
+};
+
+setInterval(add_user_new, 3000);
 
 
+*/
 
 // Получение сообщений с сервера
 var last_date = "0";
@@ -311,7 +355,7 @@ if(your_name_reg.value !=""){
   var user_enter = your_name_reg.value;
   enter_user.innerHTML = your_name_reg.value;
   var arr_user = user_send.innerHTML;
-
+//  pull_user_new();
   function checkName(item) {  // для проверки имени пользователя
   var user_name = item.username;
   if(user_enter == user_name){
@@ -351,9 +395,9 @@ if(your_name_reg.value !=""){
   enter_user.innerHTML = your_name_reg.value;
   send_nik_server();
 //  register_close();
+
   alert("Спасибо за регистрацию. Выполните вход")
-  
-  console.log(pull_user_new());
+  console.log("Новый пользователь!");
   pull_user_new();
 
 //  location.reload(); //перезагрузка страницы
