@@ -12,8 +12,7 @@
 
 	<div id="wrapper" class="wrapper" style="display: none;">
 		<header>
-		<div id="user_send" style="display: none;"></div>  <!-- записываем пользователей в этот див -->
-		<div id="your_id" style="display: none;">11</div>  <!-- записываем id пользователя в этот див -->
+		<div id="your_id" style="display: none;"></div>  <!-- записываем id пользователя в этот див -->
 			<div class="time">
 				<p class="online-time">Вы на сайте: <span id="online_time">1h 30m</span></p>
 				<p class="local-time">Сейчас: <span id="local_time_now">10:45</span></p>
@@ -41,7 +40,6 @@
 
 		<div class="chat">
 			<ul class="chat-all">
-<!-- 				<li class="chat-main active"><a href="#">Main chat</a></li> -->
 				<li id="tema">Сегодня обсуждаем ямы на дорогах в городе Чернигове</li>
 
 			</ul>
@@ -102,16 +100,18 @@
 				<div>Обсуждаем вместе интересные темы</div>
 				<img src="images/hobnob.png">
 			</div>
-<!--        	<div id="close_1" title="Закрыть" class="close_1">X</div> -->
         	<p class="tema_day">Добрый день ! Для участия в обсуждении зарегистрируйтесь или войдите. </p>
-        	<p id="tema_day" class="tema_day">Тема дня: Сегодня обсуждаем ямы на дорогах в городе Чернигове </p>
-	        <h3>Registration/Entry</h3>
+        	<p id="tema_day" class="tema_day"> </p>
+        	<div id="err"class="err"></div>
+	        <div class="reg_form">
+	        <h3>Регистрация/Вход</h3>
 	        	<form id="reg_form" class="input_reg">
-			        <p>Enter name:<input id="your_name_reg" type="text" required /></p>
-			        <div id="err"class="err"></div>
-			        <input id="input_reg" type="button" name="send-reg" value="Registration">
-			        <input id="input_enter" type="button" name="send-reg" value="Entry">
-			    </form>    
+			        <p>Введите имя:<input id="your_name_reg" type="text" required /></p>
+			        
+			        <input id="input_reg" type="button" name="send-reg" value="Регистрация">
+			        <input id="input_enter" type="button" name="send-reg" value="Вход">
+			    </form>
+			</div>        
 		</div>	
 	</div>    
 
